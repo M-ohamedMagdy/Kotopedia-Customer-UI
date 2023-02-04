@@ -1,0 +1,17 @@
+.header{
+  background-color: beige;
+}
+.appLogo{
+  width: 6rem;
+}
+.searchInput{
+  width: 50vw;
+}
+.searchButton{
+  color: darkcyan;
+  border-color: darkcyan;
+}
+.searchButton:hover{
+  color: white;
+  background-color: darkcyan;
+}
