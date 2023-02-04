@@ -1,4 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("http://fonts.googleapis.com/css?family=Quicksand&display=swap");
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* color palette */
+:root {
+  --color1 : #753422;
+  --color2 : #B05B3B;
+  --color3 : #D79771;
+  --color4 : #FFEBC9;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 16px;
+}
+
+html,
+button{
+  font-family: "Quicksand" , "sans-serif";
+}
+
+body{
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+}
