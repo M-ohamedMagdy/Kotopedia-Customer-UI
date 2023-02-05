@@ -1,0 +1,27 @@
+<section id="main">
+  <div class="loginForm shadow">
+    <form [formGroup]="loginForm">
+
+      <div class="emailInput">
+        <mat-form-field appearance="outline" class="w-100 py-3">
+          <mat-label>Enter your email</mat-label>
+          <input matInput placeholder="example@aaa.aaa" formControlName="email">
+          <mat-error *ngIf="emailValid">{{emailValid}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="passwordInput">
+        <mat-form-field appearance="outline" class="w-100 py-3">
+          <mat-label>Enter your password</mat-label>
+          <input matInput placeholder="password should be 6 - 12 characters" formControlName="password">
+          <mat-error *ngIf="passwordValid">{{passwordValid}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="loginButton text-center py-3">
+        <button mat-raised-button color="primary">Login</button>
+      </div>
+
+    </form>
+  </div>
+</section>
