@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("http://fonts.googleapis.com/css?family=Quicksand&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
 
 /* color palette */
 :root {
@@ -29,3 +30,6 @@ body{
 a{
   text-decoration: none;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
