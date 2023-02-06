@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+// import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,24 +18,19 @@ import { SignupComponent } from './components/pages/signup/signup.component';
 import { RegisterationComponent } from './components/pages/registeration/registeration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { HomeComponent } from './components/partials/header/home/home.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    AppComponent,
-        HeaderComponent,
         FooterComponent,
         RegisterationComponent,
         LoginComponent,
         SignupComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -49,7 +46,10 @@ import { HomeComponent } from './components/partials/header/home/home.component'
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 
 })
 
