@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/partials/header/header.component';
 import { FooterComponent } from "./components/partials/footer/footer.component";
 import { LoginComponent } from './components/pages/login/login.component';
+import { SignupComponent } from './components/pages/signup/signup.component';
 import { RegisterationComponent } from './components/pages/registeration/registeration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -21,7 +24,8 @@ import { MatRadioModule } from '@angular/material/radio';
         HeaderComponent,
         FooterComponent,
         RegisterationComponent,
-        LoginComponent
+        LoginComponent,
+        SignupComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -35,7 +39,9 @@ import { MatRadioModule } from '@angular/material/radio';
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
-        MatRadioModule
+        MatTabsModule,
+        MatCardModule,
+        MatSelectModule
 
     ]
 })

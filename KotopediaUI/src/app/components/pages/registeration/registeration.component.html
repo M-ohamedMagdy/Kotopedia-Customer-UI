@@ -1,61 +1,16 @@
-<section id="main">
+<div id="main">
+  <mat-card id="card">
+    <mat-card-content>
 
-  <div class="signupForm shadow">
-    <form [formGroup]="signupForm">
+      <mat-tab-group>
+        <mat-tab label="login">
+          <app-login></app-login>
+        </mat-tab>
+        <mat-tab label="signup">
+          <app-signup></app-signup>
+        </mat-tab>
+      </mat-tab-group>
 
-      <div class="nameInput">
-        <mat-form-field appearance="outline" class="w-100 py-2">
-          <mat-label>Enter your name</mat-label>
-          <input matInput placeholder="name should be 3 - 12 characters" formControlName="name">
-          <mat-error *ngIf="nameValid">{{nameValid}}</mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="emailInput">
-        <mat-form-field appearance="outline" class="w-100 py-2">
-          <mat-label>Enter your email</mat-label>
-          <input matInput placeholder="example@aaa.aaa" formControlName="email">
-          <mat-error *ngIf="emailValid">{{emailValid}}</mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="passwordInput">
-        <mat-form-field appearance="outline" class="w-100 py-2">
-          <mat-label>Enter your password</mat-label>
-          <input matInput placeholder="password should be 6 - 12 characters" formControlName="password">
-          <mat-error *ngIf="passwordValid">{{passwordValid}}</mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="confirmPasswordInput">
-        <mat-form-field appearance="outline" class="w-100 py-2">
-          <mat-label>Enter your password again</mat-label>
-          <input matInput placeholder="enter the password you entered above" formControlName="confirmationPassword">
-          <mat-error *ngIf="confirmationPasswordValid">{{confirmationPasswordValid}}</mat-error>
-        </mat-form-field>
-      </div>
-
-      <mat-radio-group labelPosition="after">
-        <span class="pe-5">Gender :</span>
-        <mat-radio-button value="male">Male</mat-radio-button>
-        <mat-radio-button value="female">Female</mat-radio-button>
-      </mat-radio-group>
-
-      <div class="text-center my-2">
-        <div class="text-start my-2">please insert your personal photo</div>
-        <input class="form-control" type="file" (change)="onChange($event)">
-        <!-- <button (click)="onUpload()" class="btn btn-success my-2 px-3">Upload</button> -->
-      </div>
-      <!-- <div class="container text-center jumbotron" *ngIf="shortLink">
-        <h2> Visit Here</h2>
-        <a href="{{shortLink}}">{{shortLink}}</a>
-      </div> -->
-
-      <div class="signupButton text-center py-3">
-        <button mat-raised-button color="primary">Signup</button>
-      </div>
-
-    </form>
-  </div>
-
-</section>
+    </mat-card-content>
+  </mat-card>
+</div>
