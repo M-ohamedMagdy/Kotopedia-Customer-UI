@@ -1,1 +1,1 @@
-# Kotopedia-Mean-Stack-Group-Project-
+# Kotopedia-Customer-UI
