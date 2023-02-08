@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HomeComponent {
   // move it to allproducts page
-   Allproducts: { src: string, name: string ,category:string,unitprice:number }[] = [
+    Allproducts: { src: string, name: string ,category:string,unitprice:number }[] = [
     { "src": "assets/home_images/novels.jpeg", "name": "أحدب نوتردام","category" :"romantic","unitprice":5},
     { "src": "assets/home_images/romantic.jpeg", "name": "ما وراء القضبان","category" :"Fantasy","unitprice":10},
     { "src": "assets/home_images/kids.png", "name": "small kid","category" :"Kids","unitprice":15},
