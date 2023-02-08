@@ -19,6 +19,7 @@ import { RegisterationComponent } from './components/pages/registeration/registe
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/pages/home/home.component';
+import { CartComponent } from './components/pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HomeComponent } from './components/pages/home/home.component';
         FooterComponent,
         RegisterationComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+        CartComponent
   ],
   imports: [
     BrowserModule,
