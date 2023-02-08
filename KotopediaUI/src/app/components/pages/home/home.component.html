@@ -1,3 +1,4 @@
+
 <div class="row  justify-content-center container-fluid   " >
 <div class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
   <a href="/products"> <img src="../../../../assets/img9.jfif" alt="" class="" height="200px"  ></a>
@@ -22,4 +23,11 @@
 <div class="col-md-4 mt-2  ml-2 col-12 d-grid mt-5 " style="justify-items:center ;">
   <a href="/products"> <img src="../../../../assets/img19.jfif" alt="" class="" height="200px" ></a>
   <h3 class="mt-1">Crime</h3>
+
+<div class="row  justify-content-center container-fluid   " style="background-image: url('assets/home_images/background.jpg'); width: 100%; margin-right: 0%;" >
+<div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
+<img [src]="x.src" alt="" class="" height="200px" (click)="addToCart(y)" >
+  <h5 class="mt-1">{{x.category}}</h5>
+
 </div>
+

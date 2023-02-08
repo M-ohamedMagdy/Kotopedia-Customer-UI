@@ -1,5 +1,8 @@
 <app-header></app-header>
 
 
-<router-outlet></router-outlet>
+<router-outlet>
+  <app-home  (MyEvent)="getData($event)"  ></app-home>
+
+</router-outlet>
 <app-footer></app-footer>

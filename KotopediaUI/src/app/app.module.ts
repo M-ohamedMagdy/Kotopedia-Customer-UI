@@ -30,7 +30,7 @@ import { ProductsComponent } from './components/pages/products/products.componen
         RegisterationComponent,
         LoginComponent,
         SignupComponent,
-        ProductsComponent
+        ProductsComponent,
   ],
   imports: [
     BrowserModule,
