@@ -6,25 +6,16 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  // move it to allproducts page
-    Allproducts: { src: string, name: string ,category:string,unitprice:number }[] = [
-    { "src": "assets/home_images/novels.jpeg", "name": "أحدب نوتردام","category" :"romantic","unitprice":5},
-    { "src": "assets/home_images/romantic.jpeg", "name": "ما وراء القضبان","category" :"Fantasy","unitprice":10},
-    { "src": "assets/home_images/kids.png", "name": "small kid","category" :"Kids","unitprice":15},
-    { "src": "assets/home_images/ho.jpg", "name": "أحدب نوتردام","category" :"Horror","unitprice":85},
-    { "src": "assets/home_images/hist.jpg", "name": "أحدب نوتردام","category" :"history","unitprice":9},
-    { "src": "assets/home_images/crime.jpg", "name": "أحدب نوتردام","category" :"Crime","unitprice":7}
-
+    Allproducts: { src: string ,category:string}[] =
+    [
+    { "src": "../../../../assets/img9.jfif","category" :"Romantic"},
+    { "src": "../../../../assets/img10.jfif","category" :"Fantasy"},
+    { "src": "../../../../assets/img11.jfif","category" :"Children"},
+    { "src": "../../../../assets/img20.jfif","category" :"Business"},
+    { "src": "../../../../assets/home_images/hist.jpg","category" :"history"},
+    { "src": "../../../../assets/img19.jfif","category" :"Crime"}
 ];
 @Output()  MyEvent=new EventEmitter();
-
-  cartproducts: { src: string; name: string; category: string; unitprice: number; }[] = [];
-
-  addToCart(x:any){
-    this.cartproducts.push(this.Allproducts[x]);
-    this.MyEvent.emit(this.cartproducts);
-    console.log(this.cartproducts);
-  }
 
 }
 

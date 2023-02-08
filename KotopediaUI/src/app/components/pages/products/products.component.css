@@ -26,6 +26,9 @@
   margin: 0 auto;
   width: 70%;
 }
+.searchB .btn:hover{
+  color: white;
+}
 .btn-outline:hover {
   background-color: var(--color2);
 }
