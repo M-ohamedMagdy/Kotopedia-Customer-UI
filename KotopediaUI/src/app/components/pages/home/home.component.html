@@ -1,0 +1,8 @@
+
+<div class="row row-cols-1 row-cols-md-3 g-4 column2">
+  <div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
+    <a href="/products"> <img [src]="x.src" alt="" class="" height="200px"> </a>
+    <a href="/products"><h2 class="mt-1">{{x.category}}</h2></a>
+  </div>
+</div>
+

@@ -40,7 +40,7 @@
     <div>
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Gender</mat-label>
-        <mat-select formControlName="gender">
+        <mat-select matInput formControlName="gender">
           <mat-option *ngFor="let g of genders" [value]="g.value">
             {{g.value}}
           </mat-option>
@@ -50,11 +50,11 @@
 
     <div class="text-center my-2">
       <div class="text-start my-1">please insert your personal photo</div>
-      <input class="form-control" type="file" (change)="getPhoto($event)" formControlName="photo">
+      <input matInput class="form-control" type="file" (change)="getPhoto($event)" formControlName="photo">
     </div>
 
     <div class="signupButton text-center py-2">
-      <button type="submit" mat-raised-button color="primary">Signup</button>
+      <button matInput type="submit" mat-raised-button color="primary">Signup</button>
     </div>
 
   </form>
