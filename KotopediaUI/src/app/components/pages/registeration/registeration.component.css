@@ -8,9 +8,16 @@
 }
 
 #card{
-  width: 400px;
+  width: 28vw;
+  min-width: 400px;
   height: fit-content;
   background-color: var(--color4);
-  margin: 3rem 55vw;
+  margin: 0.5rem 50%;
 }
 
+@media screen and (max-width: 992px){
+  #card{
+    margin: 0.5rem auto;
+    min-width: 350px;
+  }
+}
