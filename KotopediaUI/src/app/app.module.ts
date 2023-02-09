@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 // import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/pages/home/home.component';
 import { ProductsComponent } from './components/pages/products/products.component';
+import { PayementComponent } from './components/pages/payement/payement.component';
+import { CommonModule } from '@angular/common'
+import { CartComponent } from './components/pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { ProductsComponent } from './components/pages/products/products.componen
         LoginComponent,
         SignupComponent,
         ProductsComponent,
+        PayementComponent,
+        CartComponent
   ],
   imports: [
     BrowserModule,
@@ -44,13 +49,16 @@ import { ProductsComponent } from './components/pages/products/products.componen
     MatButtonModule,
     MatTabsModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    CommonModule
+
 
   ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
   ],
 
 })

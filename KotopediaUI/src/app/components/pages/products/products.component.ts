@@ -1,27 +1,41 @@
 import { Component , EventEmitter, Output  } from '@angular/core';
+import { ProuductsService } from 'src/app/services/prouducts.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+
 export class ProductsComponent {
+
+ CartButton:string[]=["Add To Cart","Add To Cart","Add To Cart","Add To Cart","Add To Cart","Add To Cart"];
+
+ indicator:boolean[]=[true,true,true,true,true,true];
+
   // move it to allproducts page
-  Allproducts: { src: string, name: string ,category:string,unitprice:number }[] = [
-    { "src": "../../../../assets/img2.jpg", "name": "Change for the better","category" :"romantic","unitprice":100},
-    { "src": "../../../../assets/img3.jpg", "name": "Rich Dad Poor Dad","category" :"Fantasy","unitprice":150},
-    { "src": "../../../../assets/img4.jpg", "name": "Attomic Habits","category" :"Kids","unitprice":120},
-    { "src": "../../../../assets/img5.jpg", "name": "The Richest Man in Babylon","category" :"Horror","unitprice":85},
-    { "src": "../../../../assets/img6.jpg", "name": "Lojain","category" :"history","unitprice":90},
-    { "src": "../../../../assets/mark_manson.jpg", "name": "The Art of Not Giving a interest","category" :"Crime","unitprice":70}
-  ];
+   Allproducts: { src: string; name: string; category: string; unitprice: number; }[] = [];
+
+  constructor(public ser:ProuductsService){
+    this.Allproducts= ser.getAllProducts();
+
+  }
+
+
   @Output()  MyEvent=new EventEmitter();
 
   cartproducts: { src: string; name: string; category: string; unitprice: number; }[] = [];
 
-  addToCart(x:any){
-    this.cartproducts.push(this.Allproducts[x]);
-    this.MyEvent.emit(this.cartproducts);
-    console.log(this.cartproducts);
+  addToCart(x:number){
+    if(this.indicator[x]){
+      this.CartButton[x]="Remove";
+      this.ser.setCartProducts(this.Allproducts[x]);
+    }
+    else{
+      this.CartButton[x]="Add To Cart";
+      this.ser.RemoveFromCart(x);
+    }
+    console.log(this.ser.getCartProducts());
+    this.indicator[x] = !this.indicator[x];}
+
   }
-}
