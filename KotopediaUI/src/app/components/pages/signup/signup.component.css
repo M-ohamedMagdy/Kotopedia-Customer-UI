@@ -1,4 +1,6 @@
-
+mat-error{
+ font-size: 12px;
+}
 
 .signupButton button{
   background-color: var(--color2);

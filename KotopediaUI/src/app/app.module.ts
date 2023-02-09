@@ -42,7 +42,6 @@ import { MatSelectModule } from '@angular/material/select';
         MatTabsModule,
         MatCardModule,
         MatSelectModule
-
     ]
 })
 export class AppModule { }

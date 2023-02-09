@@ -1,44 +1,48 @@
 <div class="signupForm shadow">
   <form [formGroup]="signupForm">
 
-    <div class="nameInput">
-      <mat-form-field appearance="outline" class="w-100 py-1">
+    <div class="nameInput py-1">
+      <mat-form-field appearance="outline" class="w-100">
         <mat-label>Enter your name</mat-label>
-        <input matInput placeholder="name should be 3 - 12 characters" formControlName="name">
-        <mat-error *ngIf="nameValid">{{nameValid}}</mat-error>
+        <input #nameInput matInput placeholder="name should be 3 - 20 characters" formControlName="name">
+        <mat-error *ngIf="nameNotValid">{{nameNotValid}}</mat-error>
       </mat-form-field>
     </div>
 
-    <div class="emailInput">
-      <mat-form-field appearance="outline" class="w-100 py-1">
+    <div class="emailInput py-1">
+      <mat-form-field appearance="outline" class="w-100">
         <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="example@aaa.aaa" formControlName="email">
-        <mat-error *ngIf="emailValid">{{emailValid}}</mat-error>
+        <input #emailInput matInput placeholder="example@aaa.aaa" formControlName="email">
+        <mat-error *ngIf="emailNotValid">{{emailNotValid}}</mat-error>
       </mat-form-field>
     </div>
 
-    <div class="passwordInput">
-      <mat-form-field appearance="outline" class="w-100 py-1">
+    <div class="passwordInput pb-3">
+      <mat-form-field appearance="outline" class="w-100">
         <mat-label>Enter your password</mat-label>
-        <input matInput placeholder="password should be 6 - 12 characters" formControlName="password">
-        <mat-error *ngIf="passwordValid">{{passwordValid}}</mat-error>
+        <input #passwordInput type="password" matInput placeholder="password should be 8 - 16 characters" formControlName="password">
+        <mat-error *ngIf="passwordNotValid">{{passwordNotValid}}</mat-error>
       </mat-form-field>
     </div>
 
-    <div class="confirmPasswordInput">
-      <mat-form-field appearance="outline" class="w-100 py-1">
+    <div class="confirmPasswordInput pt-2">
+      <mat-form-field appearance="outline" class="w-100">
         <mat-label>Enter your password again</mat-label>
-        <input matInput placeholder="enter the password you entered above" formControlName="confirmationPassword">
-        <mat-error *ngIf="confirmationPasswordValid">{{confirmationPasswordValid}}</mat-error>
+        <input #passwordRepeatInput type="password" matInput placeholder="enter the password you entered above" formControlName="confirmationPassword">
+        <mat-error *ngIf="confirmationPasswordNotValid || passwordsNotEqual">{{confirmationPasswordNotValid}}</mat-error>
       </mat-form-field>
     </div>
+
+    <!-- <div>
+      {{passwordsNotEqual}}
+    </div> -->
 
     <div>
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Gender</mat-label>
-        <mat-select>
+        <mat-select formControlName="gender">
           <mat-option *ngFor="let g of genders" [value]="g.value">
-            {{g.viewValue}}
+            {{g.value}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -46,11 +50,11 @@
 
     <div class="text-center my-2">
       <div class="text-start my-1">please insert your personal photo</div>
-      <input class="form-control" type="file" (change)="getPhoto($event)">
+      <input class="form-control" type="file" (change)="getPhoto($event)" formControlName="photo">
     </div>
 
     <div class="signupButton text-center py-2">
-      <button mat-raised-button color="primary">Signup</button>
+      <button type="submit" mat-raised-button color="primary">Signup</button>
     </div>
 
   </form>

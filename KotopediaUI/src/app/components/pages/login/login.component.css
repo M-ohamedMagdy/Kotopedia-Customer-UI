@@ -1,3 +1,6 @@
+mat-error{
+  font-size: 12px;
+ }
 
 .loginButton button{
   background-color: var(--color2);
