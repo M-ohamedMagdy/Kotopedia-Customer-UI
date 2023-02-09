@@ -1,0 +1,109 @@
+body{
+    background-color: var(--color4);
+}
+.bg{
+    width: 100%;
+   min-height: 60vh;
+    background-image: url('../../../assets/books1.jpg');
+    background-size: cover;
+    position: relative;
+}
+.bg .container{
+    overflow: hidden;
+}
+.userImg{
+    border-radius: 50%;
+    position: absolute;
+   max-width: 200px;
+   left: 2rem;
+   top: 19rem;
+}
+.userImg:hover{
+    cursor: pointer;
+}
+.changepic{
+   border-radius: 50%;
+   position: absolute;
+   width: 200px;
+   height: 200px;
+   left: 2rem;
+   top: 19rem;
+   background-color: rgba(250, 195, 127, 0.475);
+   display: block;
+   z-index: 111111;
+   text-align: center;
+}
+.camera{
+    position: absolute;
+   font-size: 35px;
+   left: 5.2rem;
+   top: 6rem;
+   color: var(--color1);
+}
+.changepic h6{
+    position: absolute;
+    left: 1.6rem;
+    top: 9rem;
+    color: var(--color1);
+
+}
+
+.data{
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around; 
+    margin-top: 7%;
+   
+}
+.con{
+    background-color: var(--color4);
+    width: 100%;
+    padding: 0.5rem;
+    padding-left: 2rem;
+}
+label{
+    color: var(--color1);
+    font-size: 20px;
+}
+.con input,select{
+    
+    color:var(--color1) ;
+    background-color: var(--color4);
+    width: 90%;
+    outline: none;
+    border: 0;
+   
+}
+.txt:focus{
+ border: 5px;
+  border-bottom: 5px var(--color1);
+}
+.edit,.done{
+    color: var(--color1);
+    
+}
+.done{
+    display: none;
+}
+@media (max-width: 1300px) {
+   .userImg{
+    width: 150px;
+   }
+   .changepic{
+    width: 150px;
+    height: 150px;
+   }
+   .camera{
+    left: 3.8rem;
+    top: 4rem;
+    font-size: 30px;
+
+}
+.changepic h6{
+   
+    left: 0.5rem;
+    top: 6rem;
+}
+  }

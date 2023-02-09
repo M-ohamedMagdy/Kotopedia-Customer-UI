@@ -21,20 +21,27 @@ import { ProductsComponent } from './components/pages/products/products.componen
 import { PayementComponent } from './components/pages/payement/payement.component';
 import { CommonModule } from '@angular/common'
 import { CartComponent } from './components/pages/cart/cart.component';
+import { AboutComponent } from './components/pages/about/about.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-        FooterComponent,
-        RegisterationComponent,
-        LoginComponent,
-        SignupComponent,
-        ProductsComponent,
-        PayementComponent,
-        CartComponent
+    FooterComponent,
+    RegisterationComponent,
+    LoginComponent,
+    SignupComponent,
+    ProductsComponent,
+    PayementComponent,
+    CartComponent,
+    AboutComponent,
+    FooterComponent,
+    ProfileComponent,
     ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
