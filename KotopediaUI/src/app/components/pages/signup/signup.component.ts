@@ -1,12 +1,13 @@
-import { Component, OnChanges } from '@angular/core';
+import { Component, OnChanges ,OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppHttpService } from 'src/app/services/app-http.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit{
 
   passwordsNotEqual:boolean = true;
 
@@ -17,7 +18,17 @@ export class SignupComponent {
     {value: 'g-2', viewValue: 'Female'}
   ];
 
-  constructor( ) { }
+  constructor(public myService:AppHttpService ) {
+
+  }
+
+  ngOnInit(): void {
+    this.myService.getAllCustomers().subscribe(
+      (res)=>{console.log(res)},
+      (err)=>{console.log(err)}
+    )
+
+  }
 
   ngOnChanges(): void {
     this.passwordsNotEqual = this.signupForm.controls['confirmationPassword'].value !== this.signupForm.controls['password'].value;
@@ -32,7 +43,7 @@ export class SignupComponent {
 
   get nameValid(){
     return !this.signupForm.controls['name'].value ? 'You must enter a value'
-     : !this.signupForm.controls['name'].valid ? 'Not a valid format' : '';
+      : !this.signupForm.controls['name'].valid ? 'Not a valid format' : '';
   }
 
   get emailValid(){
@@ -53,5 +64,6 @@ export class SignupComponent {
 
   getPhoto(event:any) {
     this.file = event.target.files[0];
+    console.log(this.file);
   }
 }

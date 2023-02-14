@@ -25,7 +25,6 @@ import { CartComponent } from './components/pages/cart/cart.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +55,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     BrowserAnimationsModule
 
   ],
-  providers: [],
+  providers: [
+    //service
+
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
