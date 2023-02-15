@@ -1,6 +1,9 @@
 import { Component, OnChanges ,OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators ,FormBuilder } from '@angular/forms';
 import { AppHttpService } from 'src/app/services/app-http.service';
+import {HttpClient} from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-signup',
@@ -9,17 +12,21 @@ import { AppHttpService } from 'src/app/services/app-http.service';
 })
 export class SignupComponent implements OnInit{
 
-  passwordsNotEqual:boolean = true;
-
-  file : File|undefined;
+  signupForm:FormGroup;
 
   genders: any[] = [
-    {value: 'g-1', viewValue: 'Male'},
-    {value: 'g-2', viewValue: 'Female'}
+    {value: 'Male', viewValue: 'Male'},
+    {value: 'Female', viewValue: 'Female'}
   ];
 
-  constructor(public myService:AppHttpService ) {
-
+  constructor( private formBulider:FormBuilder ,public myService:AppHttpService ,private http:HttpClient ) {
+    this.signupForm = this.formBulider.group({
+      name:['',[Validators.required,Validators.maxLength(12),Validators.minLength(3)]],
+      email:['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password:['',[Validators.required,Validators.maxLength(12),Validators.minLength(6)]],
+      gender:[''],
+      photo:[[],[Validators.required]],
+    })
   }
 
   ngOnInit(): void {
@@ -29,25 +36,16 @@ export class SignupComponent implements OnInit{
     )
 
   }
-
-  ngOnChanges(): void {
-    this.passwordsNotEqual = this.signupForm.controls['confirmationPassword'].value !== this.signupForm.controls['password'].value;
-  }
-
-  signupForm = new FormGroup({
-    name: new FormControl('',[Validators.required,Validators.maxLength(12),Validators.minLength(3)]),
-    email : new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-    password : new FormControl('',[Validators.required,Validators.maxLength(12),Validators.minLength(6)]),
-    confirmationPassword: new FormControl('',[Validators.required,Validators.maxLength(12),Validators.minLength(6)])
-  })
+  ngOnChanges(): void {}
 
   get nameValid(){
     return !this.signupForm.controls['name'].value ? 'You must enter a value'
       : !this.signupForm.controls['name'].valid ? 'Not a valid format' : '';
   }
 
+
   get emailValid(){
-    return !this.signupForm.controls.email.value ? 'You must enter a value'
+    return !this.signupForm.controls['email'].value ? 'You must enter a value'
     : !this.signupForm.controls['email'].valid ? 'Not a valid email' : '';
   }
 
@@ -56,14 +54,32 @@ export class SignupComponent implements OnInit{
     : !this.signupForm.controls['password'].valid ? 'Not a valid password' : '';
   }
 
-  get confirmationPasswordValid(){
-    return !this.signupForm.controls['confirmationPassword'].value ? 'You must enter a value'
-    : !this.signupForm.controls['confirmationPassword'].valid ? 'Not a valid password'
-    : this.passwordsNotEqual ? 'Please enter the same password' : '';
+
+  selectedFile:File|any =null ;
+  getPhoto(event:any) {
+    console.log(event);
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
   }
 
-  getPhoto(event:any) {
-    this.file = event.target.files[0];
-    console.log(this.file);
+  signUp(){
+    try {
+      const fd = new FormData();
+    fd.append('name',this.signupForm.get('name')?.value);
+    fd.append('email',this.signupForm.get('email')?.value);
+    fd.append('password',this.signupForm.get('password')?.value);
+    fd.append('gender',this.signupForm.get('gender')?.value);
+    fd.append('photo',this.selectedFile,this.selectedFile.name);
+    console.log(fd)
+    this.http.post("http://localhost:3000/customer/signup",fd).subscribe(
+      res=>{
+        console.log(res);
+        console.log(this.signupForm.value);
+      }
+    )
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 }
