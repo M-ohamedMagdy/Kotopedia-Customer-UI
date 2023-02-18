@@ -22,4 +22,8 @@ export class SendUserDataService {
     return this.myClient.get(this.baseURL+`/${userId}`);
   }
 
+  sendUserData(userData:any){
+    return this.myClient.post(this.baseURL,userData)
+  }
+
 }

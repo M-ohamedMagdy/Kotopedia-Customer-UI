@@ -23,15 +23,15 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 column2">
 
   <!-- B -->
-  <div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
+  <div *ngFor="let x of Products let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
     <div class="card">
-      <img [src]="x.src" alt="" class="card-img-top">
+      <img [src]="x.photo" alt="" class="card-img-top">
       <div class="card-body">
-        <h3 class="card-title">{{x.name}}</h3>
-        <b>EGP {{x.unitprice}}</b>
-        <p class="card-text">A summary of the most important self-development and self-improvement books.</p>
-        <div class="d-flex justify-content-between">
-          <a  class="btn btn-primary m-auto"  (click)="addToCart(y)"> {{CartButton[y]}}</a>
+        <h3 class="card-title">{{x.title}}</h3>
+        <b>EGP {{x.unitPrice}}</b>
+        <p class="card-text">{{x.description}}</p>
+        <div class="d-flex justify-content-between btnsL">
+          <a  class="btn btn-primary m-auto"> {{CartButton[y]}}</a>
           <a href="/pay" class="btn btn-primary m-auto">Buy Now</a>
         </div>
       </div>

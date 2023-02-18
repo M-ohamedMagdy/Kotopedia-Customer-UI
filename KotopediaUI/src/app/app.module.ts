@@ -25,6 +25,7 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,14 +39,12 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     PayementComponent,
     CartComponent,
     AboutComponent,
-    FooterComponent,
     ProfileComponent,
     ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -55,9 +54,14 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     MatTabsModule,
     MatCardModule,
     MatSelectModule,
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+
+  providers: [
+    //service
+  ],
+  
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent {
 
-  constructor( private myServ : SendUserDataService, private localstorage: LocalStorageService ) { }
+  constructor( private myServ : SendUserDataService, private local: LocalStorageService ) { }
 
   loginForm = new FormGroup({
     email : new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
@@ -37,20 +37,14 @@ sendUserData(){
     next: res => {
       this.currentUser = res;
       console.log(this.currentUser);
-      localStorage.setItem('token', this.currentUser.token);
-      localStorage.setItem('user', this.currentUser.user);
-      console.log("data saved to local s");
-
+      this.local.set('user', this.currentUser.user);
+      this.local.set('token', this.currentUser.token);
     },
     error: err => {
       console.log({email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value});
       console.log(err);
     },
   })
-}
-
-fire(){
-  console.log(localStorage.getItem('token'));
 }
 
 }

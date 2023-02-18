@@ -8,7 +8,7 @@ import { ProuductsService } from 'src/app/services/prouducts.service';
 })
 export class CartComponent {
 
- cartproducts: { src: string; name: string; category: string; unitprice: number; }[] = [];
+cartproducts: { src: string; name: string; category: string; unitPrice: number; }[] = [];
   constructor(public ser:ProuductsService){
 this.cartproducts=ser.getCartProducts();
 console.log(this.cartproducts);
