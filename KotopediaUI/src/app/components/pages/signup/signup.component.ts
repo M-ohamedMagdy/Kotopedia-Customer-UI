@@ -1,5 +1,6 @@
 import { Component, DoCheck } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SendUserDataService } from 'src/app/services/send-user-data.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,14 +15,14 @@ export class SignupComponent implements DoCheck {
 
   genders: any[] = [{value: 'Male'},{value: 'Female'}];
 
-  constructor( ) { }
+  constructor( private myServ : SendUserDataService ) { }
 
   ngDoCheck(): void {
     this.passwordsNotEqual = this.signupForm.controls['confirmationPassword'].value !== this.signupForm.controls['password'].value;
   }
 
   signupForm = new FormGroup({
-    name: new FormControl('',[Validators.required,Validators.maxLength(20),Validators.minLength(3)]),
+    name: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]),
     email : new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password : new FormControl('',[Validators.required,Validators.pattern(new RegExp('^[a-zA-Z0-9]{8,16}$'))]),
     confirmationPassword: new FormControl('',[Validators.required,Validators.pattern(new RegExp('^[a-zA-Z0-9]{8,16}$'))]),
@@ -53,6 +54,23 @@ export class SignupComponent implements DoCheck {
 
   getPhoto(event:any) {
     this.file = event.target.files[0];
+  }
+
+  userData:object = {}
+
+  createUser(){
+    this.userData = {
+      name: this.signupForm.controls['name'].value,
+      email: this.signupForm.controls['email'].value,
+      password: this.signupForm.controls['password'].value,
+      gender: this.signupForm.controls['gender'].value,
+      photo: this.signupForm.controls['photo'].value
+    }
+    this.myServ.sendSignupData(JSON.stringify(this.userData)).subscribe({
+      next:(res)=>{console.log(res);},
+      error:(err)=>{console.log(this.userData); console.log(err);}
+    })
+
   }
 
 }

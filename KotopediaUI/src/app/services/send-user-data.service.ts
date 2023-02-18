@@ -8,10 +8,18 @@ export class SendUserDataService {
 
   constructor(private myClient : HttpClient) { }
 
-  private baseURL = "https://jsonplaceholder.typicode.com/users";
+  private baseURL = "http://localhost:3000/customer";
 
-  sendUserData(userData:any){
-    return this.myClient.post(this.baseURL,userData)
+  sendLoginData(userInfo:object){
+    return this.myClient.post(this.baseURL+'/login',userInfo);
+  }
+
+  sendSignupData(userData:any){
+    return this.myClient.post(this.baseURL+'/login',userData);
+  }
+
+  getUserData(userId:any){
+    return this.myClient.get(this.baseURL+`/${userId}`);
   }
 
 }

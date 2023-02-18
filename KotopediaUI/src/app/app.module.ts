@@ -22,7 +22,7 @@ import { PayementComponent } from './components/pages/payement/payement.componen
 import { CommonModule } from '@angular/common'
 import { CartComponent } from './components/pages/cart/cart.component';
 import { AboutComponent } from './components/pages/about/about.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
 
 
 @NgModule({

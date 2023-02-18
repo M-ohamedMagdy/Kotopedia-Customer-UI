@@ -1,5 +1,5 @@
 <div class="signupForm shadow">
-  <form [formGroup]="signupForm">
+  <form [formGroup]="signupForm" (ngSubmit)="createUser()">
 
     <div class="nameInput py-1">
       <mat-form-field appearance="outline" class="w-100">
@@ -50,7 +50,7 @@
 
     <div class="text-center my-2">
       <div class="text-start my-1">please insert your personal photo</div>
-      <input matInput class="form-control" type="file" (change)="getPhoto($event)" formControlName="photo">
+      <input class="form-control" type="file" (change)="getPhoto($event)" formControlName="photo">
     </div>
 
     <div class="signupButton text-center py-2">

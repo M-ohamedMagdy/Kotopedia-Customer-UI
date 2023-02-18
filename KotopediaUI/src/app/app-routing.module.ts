@@ -6,7 +6,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { ProductsComponent } from './components/pages/products/products.component';
 import { CartComponent } from './components/pages/cart/cart.component';
 import { PayementComponent } from './components/pages/payement/payement.component';
-import { ProfileComponent } from "./pages/profile/profile.component";
+import { ProfileComponent } from "./components/pages/profile/profile.component";
 
 const routes: Routes = [
                           {path:"", component:HomeComponent},

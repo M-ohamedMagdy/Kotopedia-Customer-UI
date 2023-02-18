@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { SendUserDataService } from 'src/app/services/send-user-data.service';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,8 @@ export class HomeComponent {
     { "src": "../../../../assets/img19.jfif","category" :"Crime"}
 ];
 @Output()  MyEvent=new EventEmitter();
+
+constructor(private mysrv:SendUserDataService) { }
 
 }
 

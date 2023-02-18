@@ -12,15 +12,15 @@
       <div class="passwordInput">
         <mat-form-field appearance="outline" class="w-100 py-3">
           <mat-label>Enter your password</mat-label>
-          <input matInput placeholder="password should be 8 - 16 characters" formControlName="password">
+          <input matInput type="password" placeholder="password should be 8 - 16 characters" formControlName="password">
           <mat-error *ngIf="passwordValid">{{passwordValid}}</mat-error>
         </mat-form-field>
       </div>
 
-      <input type="submit" value="Login" mat-raised-button color="primary">
       <div class="loginButton text-center py-3">
-        <button type="submit" mat-raised-button color="primary">Login</button>
+        <button type="submit" (click)="sendUserData()" mat-raised-button color="primary">Login</button>
       </div>
 
+      <button (click)="fire()">localStorage</button>
     </form>
   </div>
