@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 export class ProuductsService {
    private Allproducts: { src: string; name: string; category: string; unitprice: number; }[] = [];
    private cartproducts: { src: string; name: string; category: string; unitprice: number; }[] = [];
+   private orderproducts: { src: string; name: string; category: string; unitprice: number; quantity:number; status:string; id:number;}[] = [];
 
 
   constructor() {

@@ -1,0 +1,93 @@
+<section class="h-80 h-custom" style="background-color: #ffffff;;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-lg-8">
+                <div class="p-5">
+                  <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h1 class="fw-bold mb-0 text-black">Orders</h1>
+                  </div>
+                  <hr class="my-4">
+
+                <div class="row mb-4 d-flex justify-content-between align-items-center">
+                  <div class="col-md-3 col-lg-3 col-xl-3">
+                    <h6 class="mb-0 text-muted">{{orderproducts.length}} items</h6>
+                    <h5 class="text-muted">Order ID: {{id}}</h5>
+                    <h5 class="text-muted">Date: {{date}}</h5>
+                    <h5 class="text-muted">Estemated delevery : {{esdate}}</h5>
+                    <h5 class="text-muted">Status: {{status}}</h5>
+                  </div>
+                </div>
+
+                  <!-- this is the card -->
+
+                  <div  *ngFor="let x of orderproducts let y=index" class="row mb-4 d-flex justify-content-between align-items-center">
+
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img
+                        [src]="x.src"
+                        class="img-fluid rounded-3 w-200 h-300  " alt="Cotton T-shirt">
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <h6 class="text-muted">{{x.name}}</h6>
+                      <h6 class="text-black mb-0">{{x.category}}</h6>
+                    </div>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                      <h6 class="mb-0">€ {{x.unitprice}}</h6>
+                    </div>
+
+                  </div>
+
+                  <hr class="my-4">
+
+                  <div class="pt-5">
+                    <h6 class="mb-0"><a routerLink="/cart" class="text-body"><i
+                          class="fas fa-long-arrow-alt-left me-2" ></i>Back to cart</a></h6>
+                  </div>
+                </div>
+              </div>
+
+              <!--summary-->
+
+              <div class="col-lg-4 bg-grey">
+                <div class="p-5">
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                  <hr class="my-4">
+
+                  <div class="d-flex justify-content-between mb-4" >
+                    <h5 class="text-uppercase">items {{orderproducts.length}}</h5>
+                  </div>
+
+
+                  <hr class="my-4">
+
+                  <div class="d-flex justify-content-between mb-5">
+                    <h5 class="text-uppercase">Total price</h5>
+                    <h5>€ {{price}}</h5>
+                  </div>
+
+                  <hr class="my-4">
+                  <div class="d-flex justify-content-between mb-5">
+                    <h5 class="text-uppercase">Estemated delevery</h5>
+                    <h5 class="text-uppercase">{{esdate}}</h5>
+                  </div>
+
+                  <hr class="my-4">
+                  <div class="d-flex justify-content-between mb-5">
+                  <h5 class="text-uppercase">Status</h5>
+                  <h5 class="text-uppercase">{{status}}</h5>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
