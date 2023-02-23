@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common'
 import { CartComponent } from './components/pages/cart/cart.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -55,13 +56,16 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     MatCardModule,
     MatSelectModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    Ng2SearchPipeModule
+
+
   ],
 
   providers: [
     //service
   ],
-  
+
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -2,7 +2,7 @@
 
   <div class="searchB">
     <form class="d-flex" role="search">
-      <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="seachItem">
       <button class="btn btn-outline rounded-pill px-4" type="submit">Search</button>
     </form>
   </div>
@@ -23,7 +23,9 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 column2">
 
   <!-- B -->
-  <div *ngFor="let x of Products let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
+
+  <!-- | filter:seachItem-->
+  <div style="max-height: 200px;" *ngFor="let x of Products   let y=index " class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
     <div class="card">
       <img [src]="x.photo" alt="" class="card-img-top">
       <div class="card-body">
@@ -31,7 +33,7 @@
         <b>EGP {{x.unitPrice}}</b>
         <p class="card-text">{{x.description}}</p>
         <div class="d-flex justify-content-between btnsL">
-          <a  class="btn btn-primary m-auto"> {{CartButton[y]}}</a>
+          <a  class="btn btn-primary m-auto" (click)="addToCart(y)"> {{CartButton[y]}}</a>
           <a href="/pay" class="btn btn-primary m-auto">Buy Now</a>
         </div>
       </div>

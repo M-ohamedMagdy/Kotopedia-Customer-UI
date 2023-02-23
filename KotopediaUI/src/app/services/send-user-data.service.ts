@@ -8,7 +8,7 @@ export class SendUserDataService {
 
   constructor(private myClient : HttpClient) { }
 
-  private baseURL = "http://localhost:3000/customer";
+  private baseURL = "https://kotopedia-backend.onrender.com/customer";
 
   sendLoginData(userInfo:object){
     return this.myClient.post(this.baseURL+'/login',userInfo);
