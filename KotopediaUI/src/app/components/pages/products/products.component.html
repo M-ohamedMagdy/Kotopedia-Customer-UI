@@ -20,10 +20,10 @@
     <a href="/products" class="list-group-item list-group-item-action">Crime</a>
   </div>
   <!--break point  -->
-<div class="row row-cols-1 row-cols-md-3 g-4 column2">
+<div class="row row-cols-1 row-cols-md-3 g-3 justify-content-around column2">
 
   <!-- B -->
-  <div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
+  <!-- <div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
     <div class="card">
       <img [src]="x.src" alt="" class="card-img-top">
       <div class="card-body">
@@ -36,7 +36,26 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+
+
+  <div *ngFor="let x of Allproducts let y=index" class="col-md-3 col-12    myproduct">
+    <div class="image text-center">
+      <img [src]="x.src">
+    </div>
+    <h2 class="text-center">{{x.name}}</h2>
+    <b>EGP {{x.unitprice}}</b>
+    <div class="prg">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, mollitia recusandae pariatur corporis, quia doloribus non commodi 
+      eveniet minus provident aspernatur placeat repellendus beatae doloremque ea illum perspiciatis libero reiciendis.</p>
+    </div>
+      <div class="row justify-content-around butns">
+        <a  class="col-md-5 col-12 btn btn-primary "  (click)="addToCart(y)"> {{CartButton[y]}}</a>
+              <a href="/pay" class="col-md-5 col-12 btn btn-primary ">Buy Now</a>
+      </div>
+    </div>
+  
 <!-- E -->
 
   </div>

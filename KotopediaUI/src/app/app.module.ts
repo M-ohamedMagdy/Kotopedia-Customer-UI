@@ -23,6 +23,7 @@ import { ProductsComponent } from './components/pages/products/products.componen
 import { PayementComponent } from './components/pages/payement/payement.component';
 import { CommonModule } from '@angular/common'
 import { CartComponent } from './components/pages/cart/cart.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CartComponent } from './components/pages/cart/cart.component';
         SignupComponent,
         ProductsComponent,
         PayementComponent,
-        CartComponent
+        CartComponent,
+        ProfileComponent
   ],
   imports: [
     BrowserModule,
