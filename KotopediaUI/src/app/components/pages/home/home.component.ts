@@ -3,6 +3,8 @@ import { AppHttpService } from 'src/app/services/app-http.service';
 import { SendUserDataService } from 'src/app/services/send-user-data.service';
 import Swal from 'sweetalert2';
 import { LocalStorageService } from 'angular-web-storage';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -13,7 +15,7 @@ import { LocalStorageService } from 'angular-web-storage';
 export class HomeComponent {
     Allproducts: { src: string ,category:string}[] =
     [
-    { "src": "../../../../assets/img9.jfif","category" :"romantic"},
+    { "src": "../../../../assets/img9.jfif","category" :"Romantic"},
     { "src": "../../../../assets/img10.jfif","category" :"fantasy"},
     { "src": "../../../../assets/img11.jfif","category" :"children"},
     { "src": "../../../../assets/img20.jfif","category" :"business"},
@@ -23,32 +25,27 @@ export class HomeComponent {
 @Output()  MyEvent=new EventEmitter();
 token:any;
 user:any;
+navigate:boolean=false;
 
-constructor(private mysrv:SendUserDataService,private myService:AppHttpService,
-  private local: LocalStorageService) {
-this.token=this.myService.getToken();
-console.log(this.token);
+constructor(private mysrv:SendUserDataService,private myService:AppHttpService,private router: Router,private local: LocalStorageService) {
+
+  this.token=this.myService.getToken();
 this.user=this.myService.getUser();
-console.log(this.user);
 
 
 }
-toProductByCategory(x:any){
+ toProductByCategory(x:any){
   console.log(this.Allproducts[x].category);
   if(this.token){
-
-
-    this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
-next:res=>{ this.local.set('CategoryBooks',res);
-console.log(this.local.get('CategoryBooks'));
-}  ,
-
+  this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
+next:res=>{
+   console.log(res) ;
+   this.myService.setProduct(res) ;
+   this.router.navigate(['/products']);
+},
 error:err=>{console.log(err);}
-
-
     })
-
-    window.location.href = "/products";
+    // window.location.href = "/products";
 
   }
   else{

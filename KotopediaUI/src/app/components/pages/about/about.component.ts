@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AppHttpService } from 'src/app/services/app-http.service';
+
 
 @Component({
   selector: 'app-about',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
+  constructor(private myService:AppHttpService){
+
+  }
 
 }
 

@@ -16,9 +16,8 @@ export class AppHttpService {
   httpOptions:any;
   user: any;
 sendFromHome:any;
-
+products:any;
   constructor(private myClient:HttpClient,private local: LocalStorageService) {
-
     this.token=this.local.get('token');
     this.user=this.local.get('user');
     this.httpOptions = {
@@ -26,6 +25,8 @@ sendFromHome:any;
         'Content-Type': 'application/json',
         'Authorization': `${this.getToken()}` // Here is the token
       })
+
+
     };
 
 
@@ -47,9 +48,17 @@ sendFromHome:any;
   }
 
   //2 get all products
+setProduct(x:any){
+  this.local.set('cat',x);
+this.products=x;
+}
+getProduct(){
+  this.products=this.local.get('cat');
+return this.products;
+}
+
   getAllProducts(){
     this.BaseURLGetProduct = `https://kotopedia-backend.onrender.com/customer/products/${this.user._id}`;
-
     return this.myClient.get(this.BaseURLGetProduct, this.httpOptions);
   }
 
@@ -79,6 +88,13 @@ return  this.user;
 }
 getProductsByCategory(category:any){       //Done
   return this.myClient.get(this.BaseURLGetProductByCat+`/${category}/${this.user._id}`,this.httpOptions);
+
+  // this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
+  //   next:res=>{
+  //      console.log(res) ;
+  //      this.myService.setCatProducts(res) ;
+
+
   }
 
 
@@ -86,6 +102,9 @@ setSend(){
   return this.local.get('sentData');
 
 }
+
+
+
 
 
 
