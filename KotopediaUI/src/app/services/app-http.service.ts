@@ -32,6 +32,7 @@ products:any;
 
    }
   private BaseURLGetCustomer = "https://kotopedia-backend.onrender.com/customer";
+  private BaseURLAddFeedBack = "https://kotopedia-backend.onrender.com/customer/feedbacks";
   private BaseURLAddCustomer = "https://kotopedia-backend.onrender.com/customer/signup";
   private  BaseURLGetProductByCat="https://kotopedia-backend.onrender.com/customer/products";
   private token:any;
@@ -67,6 +68,11 @@ return this.products;
         this.myClient.post(this.BaseURLAddCustomer,newUser);
   }
 
+addFeedback(feed:any){
+ return this.myClient.post(this.BaseURLAddFeedBack,feed);
+}
+
+
   //local storage token and user
   //set token and user come only from log in page
 setToken(x:any){
@@ -100,6 +106,11 @@ getProductsByCategory(category:any){       //Done
 
 setSend(){
   return this.local.get('sentData');
+
+}
+
+getFeedBacks(x:any){
+  return this.myClient.get(this.BaseURLAddFeedBack+`/${x}`);
 
 }
 

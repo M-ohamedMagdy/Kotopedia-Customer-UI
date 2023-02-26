@@ -37,11 +37,16 @@ i:number=0;
 cat:boolean=true;
 searchValue:string='';
 z:any;
+user:any;
+FeedBackBody:any;
+modalIdentifier:any;
+feedBacks:any;
 
   // move it to allproducts page
 
   constructor(public myService:AppHttpService,private local: LocalStorageService,private router: Router){
-
+this.user=this.myService.getUser();
+console.log(this.user);
   }
 
   Products:any;
@@ -73,6 +78,8 @@ z:any;
     })
     console.log(this.Products)
 
+
+
   }
 
   @Output()  MyEvent=new EventEmitter();
@@ -95,8 +102,32 @@ z:any;
   search(x:any){
     console.log(x);
   }
-  setZ(x:any){
-    this.z=x;
+
+  addFeedBack(title:any,fb:any){
+    console.log(title);
+    console.log(fb);
+    console.log(this.user.email);
+
+    this.FeedBackBody={title, email: this.user.email, body: fb };
+this.myService.addFeedback(this.FeedBackBody).subscribe();
+this.router.navigate(['/products']);
   }
+  setModalIdentifier(x:any){
+this.modalIdentifier=x;
+console.log(this.modalIdentifier);
+  }
+  modalFilter(x:number){
+    return this.modalIdentifier==x;
+  }
+
+getFeedBacks(x:any){
+  this.myService.getFeedBacks(x).subscribe({
+    next:(res)=>{
+      this.feedBacks=res;
+      console.log(res);
+    },
+    error(err){console.log(err)}
+  })
+}
 
   }
