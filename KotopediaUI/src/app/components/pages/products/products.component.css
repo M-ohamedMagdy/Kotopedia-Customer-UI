@@ -78,3 +78,14 @@ input[type="search"]:focus{
 .btnsL{
   gap: 5px;
 }
+
+/* this is last add  */
+
+.icon-hover:hover {
+  border-color: #3b71ca !important;
+  background-color: white !important;
+}
+
+.icon-hover:hover i {
+  color: #3b71ca !important;
+}
