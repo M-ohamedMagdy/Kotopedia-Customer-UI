@@ -1,19 +1,22 @@
 <div class="row">
-<div class="row col-12">
-  <div class="col-3"><img src="../../../../assets/welcome.png" id="welImg" alt="" ></div>
-  <div class="row justify-content-center col-6 mt-4" style="font-size: 3em; ">
-    Welcome To Kotopedia
+  <div class="col-12">
+    <div  class="row user_col" *ngIf="token">
+      <span class="col-1 "><img  id ="userimg" [src]="user.photo" alt="user_photo"></span>
+      <span class="col-1 ml-1 user_name" >{{user.name}}</span>
+    </div>
   </div>
-  <div  class="col-3" *ngIf="token">
-    <span class="col-1 ml-1" >welcome,{{user.name}}</span>
-    <span class="col-1"><img style="height: 25px; width: 25px;" [src]="user.photo" alt="user_photo"></span>
-  </div>
-  </div>
-<div class="row row-cols-1 row-cols-md-3 g-4 column2">
-  <div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
-    <a  (click)="toProductByCategory(y)"   > <img [src]="x.src" alt="" class="" height="200px"> </a>
-    <a   (click)="toProductByCategory(y)" ><h2 class="mt-1">{{x.category}}</h2></a>
-  </div>
-</div>
-</div>
 
+  <div class="row col-12 text-center">
+
+    <div class="col-12 col-md-4 col-lg-2 wel_text">
+      <img src="../../../../assets/welcome.png" id="welImg" alt="" >
+    </div>
+    </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 column2">
+    <div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
+      <a  (click)="toProductByCategory(y)"   > <img [src]="x.src" alt="" class="" height="200px"> </a>
+      <a   (click)="toProductByCategory(y)" ><h2 class="mt-1">{{x.category}}</h2></a>
+    </div>
+  </div>
+  </div>
