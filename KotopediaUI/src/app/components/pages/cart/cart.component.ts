@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
 import { ProuductsService } from 'src/app/services/prouducts.service';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { LocalStorageService } from 'angular-web-storage';
+import { Router } from '@angular/router';
+import { Component , EventEmitter, OnInit, Output  } from '@angular/core';
+
+
 
 
 
@@ -10,7 +13,7 @@ import { LocalStorageService } from 'angular-web-storage';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   user:any;
   headers:any;
   Cart:any;
@@ -18,7 +21,7 @@ export class CartComponent {
   userCart: any;
 
 
-  constructor(private myService:AppHttpService,private local: LocalStorageService ){
+  constructor(private myService:AppHttpService,private local: LocalStorageService ,private router: Router ){
     this.headers = {
       authorization:this.local.get('token')
   }
@@ -32,6 +35,14 @@ export class CartComponent {
         error(err){console.log(err)}
       }
     )
+
+
+
+
+    // this.cartproducts=ser.getCartProducts();
+    // console.log(this.cartproducts);
+  }
+  ngOnInit(): void {
     this.myService.getAllfromCart(this.headers).subscribe({
       next:res=>{
         this.Cart=res;
@@ -42,11 +53,6 @@ export class CartComponent {
           },
       error:err=>{console.log(err);}
           });
-
-
-
-    // this.cartproducts=ser.getCartProducts();
-    // console.log(this.cartproducts);
   }
 
   x:number=1;
@@ -55,6 +61,8 @@ export class CartComponent {
     this.myService.removefromCart(this.userCart[x].title).subscribe({
       next:(res)=>{
         console.log(res);
+        this.ngOnInit();
+
         // this.userCart = this.userCart.filter((abanoub:any) => abanoub.title !== this.userCart[x].title);
 
       },

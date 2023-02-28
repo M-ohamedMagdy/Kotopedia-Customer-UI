@@ -47,6 +47,9 @@ ProductID:any;
 Products:any;
 headers:any;
 product:any;
+Cart:any;
+userCart:any;
+titles:string[]=[];
   // move it to allproducts page
 
   constructor(public myService:AppHttpService,private local: LocalStorageService,private router: Router){
@@ -54,6 +57,10 @@ product:any;
       authorization:this.local.get('token')
     }
     this.user=this.myService.getUser();
+
+
+
+
     console.log(this.user);
 
 
@@ -73,21 +80,47 @@ product:any;
 
     }
   ngOnInit(): void {
+    //here i am going to get all titles in cart so determine if add to cart or remove
+    this.myService.getAllfromCart(this.headers).subscribe({
+      next:res=>{
+        this.Cart=res;
+        this.userCart=this.Cart.userCart;
+        for(var i=0;i<this.userCart.length;i++){ this.titles.push(this.userCart[i].title)};
 
-  this.myService.getAllProducts().subscribe(
-    {
-      next:(res)=>{
-        console.log(res);
-        this.Products=res;
-        if(this.myService.getProduct()){this.Products = this.myService.getProduct();this.myService.setProduct(null);}
-        else if(!this.myService.getProduct()){this.Products = res;}
-          for(this.i=0;this.i<this.Products.length;this.i++){ this.CartButton.push("Add To Cart");   this.local.set('cartButton',this.CartButton);}
-          for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true);this.local.set('indicators',this.indicator); }
-          console.log(this.CartButton);
-        console.log(this.Products)
-      },
-      error(err){console.log(err)}
-    })
+        this.myService.getAllProducts().subscribe(
+          {
+            next:(res)=>{
+
+              console.log(res);
+              this.Products=res;
+              if(this.myService.getProduct()){this.Products = this.myService.getProduct();this.myService.setProduct(null);}
+              else if(!this.myService.getProduct()){this.Products = res;}
+                for(this.i=0;this.i<this.Products.length;this.i++)
+                {
+                  if(this.titles.includes(this.Products[this.i].title))
+                  {
+                    this.CartButton.push("Remove");
+                    this.indicator.push(false);
+
+                  }
+                   else{
+                    this.CartButton.push("Add To Cart");
+                    this.indicator.push(true);
+                   }
+                }
+                console.log(this.CartButton);
+              console.log(this.Products)
+            },
+            error(err){console.log(err)}
+          })
+
+         console.log(this.titles);
+
+          },
+      error:err=>{console.log(err);}
+          });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // console.log(this.Products)
 
 
