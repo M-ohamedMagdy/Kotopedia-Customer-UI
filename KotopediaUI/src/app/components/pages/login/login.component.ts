@@ -33,7 +33,7 @@ export class LoginComponent {
 
   get passwordValid(){
     return !this.loginForm.controls['password'].value ? 'You must enter a value'
-    : !this.loginForm.controls['password'].valid ? 'Invalid password format' : '';
+    : !this.loginForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase) characters or digits' : '';
   }
 
 currentUser:any;
@@ -44,29 +44,35 @@ sendUserData(){
   this.myServ.sendLoginData({email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value}).subscribe({
     next: res => {
       Swal.fire({
-        position: 'top-end',
+        // position: 'top-end',
         icon: 'success',
         title: 'Logged in successfully ',
         showConfirmButton: false,
         timer: 1300
       })
-
       this.currentUser = res;
-      console.log(this.currentUser);
-      this.myService.setToken(this.currentUser.token);
-      console.log(this.currentUser.token)
-      this.myService.setUser(this.currentUser.user);
-      // this.router.navigate(['/home']);
-      setTimeout(function() {
-        window.location.href = "/home";
-    }, 1500);
+      if(this.currentUser.user.role === "admin"){
+        document.cookie = `token=${this.currentUser.token}`;
+        window.location.href = "http://localhost:4202/";
+      }
+      else{
+
+        console.log(this.currentUser);
+        console.log(this.currentUser.token)
+        this.myService.setUser(this.currentUser.user);
+        console.log(this.currentUser.user)
+        setTimeout(function() {
+          window.location.href = "/home";
+        }, 1500);
+
+      }
 
     },
     error: err => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Invalid email or password!',
+        text: 'Invalid email or password!',
       })
       this.loginForm.reset();
       console.log({email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value});

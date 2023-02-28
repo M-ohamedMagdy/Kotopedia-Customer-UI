@@ -48,7 +48,7 @@ export class SignupComponent {
 
   get passwordNotValid(){
     return !this.signupForm.controls['password'].value ? 'You must enter a value'
-    : !this.signupForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase)characters or digits' : '';
+    : !this.signupForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase) characters or digits' : '';
   }
 
   // get confirmationPasswordNotValid(){
