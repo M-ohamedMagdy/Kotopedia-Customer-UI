@@ -121,9 +121,11 @@
 
 
 
-         <!-- </p> -->
+        <!-- </p> -->
                 <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                  <a  class="btn btn-primary shadow-0 me-1" (click)="addToCart(y)">{{CartButton[y]}}</a>
+                  <!-- <button (click)="getProductD(x)" class="contain"> -->
+                    <a  class="btn btn-primary shadow-0 me-1" (click)="addToCart(y) " (click)="getProductD(x)">{{CartButton[y]}}</a>
+                  <!-- </button> -->
                   <a href="/pay" class="btn btn-primary m-auto">Buy Now</a>
 
                 </div>

@@ -68,9 +68,38 @@ return this.products;
         this.myClient.post(this.BaseURLAddCustomer,newUser);
   }
 
-addFeedback(feed:any){
- return this.myClient.post(this.BaseURLAddFeedBack,feed);
+//get user info on login
+getUserInfo(){
+  return this.myClient.get(`${this.BaseURLGetCustomer}/profile/${this.user._id}`,this.httpOptions)
 }
+
+//update user data
+updateUserData(userData:object, headers:any){
+  return this.myClient.patch(this.BaseURLGetCustomer+'/profile',userData,{headers});
+}
+
+//add feedback
+addFeedback(feed:any){
+  return this.myClient.post(this.BaseURLAddFeedBack,feed);
+}
+
+//add to cart
+addtoCart(userID:any,bookID:any,headers:any){
+  return this.myClient.post(`${this.BaseURLGetCustomer}/cart`,{userID,bookID},{headers})
+}
+
+//get user cart
+gerCart(headers:any){
+  return this.myClient.get( `${this.BaseURLGetCustomer}/cart/${this.user._id}`,{headers});
+}
+
+// update quatity of cart product
+updateProductQuatity(userID:string,title:string,quantity:any,headers:any){
+  return this.myClient.patch(`${this.BaseURLGetCustomer}/cart`,{userID,title,quantity},{headers});
+}
+
+
+
 
 
   //local storage token and user

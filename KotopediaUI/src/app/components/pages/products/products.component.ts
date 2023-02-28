@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -41,24 +42,33 @@ user:any;
 FeedBackBody:any;
 modalIdentifier:any;
 feedBacks:any;
-
+ProductID:any;
+userID:any;
+Products:any;
+headers:any;
+product:any;
   // move it to allproducts page
 
   constructor(public myService:AppHttpService,private local: LocalStorageService,private router: Router){
-this.user=this.myService.getUser();
-console.log(this.user);
+    this.headers = {
+      authorization:this.local.get('token')
+    }
+    this.user=this.myService.getUser();
+    console.log(this.user);
+    this.userID=this.user._id;
+    console.log(this.userID);
+
   }
 
-  Products:any;
   toProductByCategory(x:any){
     console.log(this.Allproducts[x].category);
 
     this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
-  next:res=>{
-     console.log(res) ;
-     this.myService.setProduct(res) ;
-     window.location.reload();
-      },
+      next:res=>{
+      console.log(res) ;
+      this.myService.setProduct(res) ;
+      window.location.reload();
+    },
   error:err=>{console.log(err);}
       })
 
@@ -68,15 +78,18 @@ console.log(this.user);
   this.myService.getAllProducts().subscribe(
     {
       next:(res)=>{
+        console.log(res);
+        this.Products=res;
         if(this.myService.getProduct()){this.Products = this.myService.getProduct();this.myService.setProduct(null);}
         else if(!this.myService.getProduct()){this.Products = res;}
           for(this.i=0;this.i<this.Products.length;this.i++){ this.CartButton.push("Add To Cart") }
           for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true) }
           console.log(this.CartButton);
+        console.log(this.Products)
       },
       error(err){console.log(err)}
     })
-    console.log(this.Products)
+    // console.log(this.Products)
 
 
 
@@ -87,18 +100,33 @@ console.log(this.user);
   cartproducts: { src: string; name: string; category: string; unitPrice: number; }[] = [];
 
   addToCart(x:number){
+    console.log(this.Products[x]);
     if(this.indicator[x]){
       this.CartButton[x]="Remove";
-
     }
     else{
       this.CartButton[x]="Add To Cart";
     }
     this.indicator[x] = !this.indicator[x];
     this.local.set('CartButton',this.CartButton);
-
+    // console.log(product); product:any,
   }
+  getProductD(product:any){
+    console.log(product);
+    this.ProductID=product._id;
+    console.log(this.ProductID)
+    console.log(this.userID);
+    this.myService.addtoCart(this.userID,this.ProductID,this.headers).subscribe(
+      {
+        next:res=>{
+          console.log(res);
+        },error:err=>{
+          console.log(err);
 
+        }
+      }
+    )
+  }
   search(x:any){
     console.log(x);
   }
@@ -109,12 +137,13 @@ console.log(this.user);
     console.log(this.user.email);
 
     this.FeedBackBody={title, email: this.user.email, body: fb };
-this.myService.addFeedback(this.FeedBackBody).subscribe();
-this.router.navigate(['/products']);
+    this.myService.addFeedback(this.FeedBackBody).subscribe();
+    this.router.navigate(['/products']);
   }
+
   setModalIdentifier(x:any){
-this.modalIdentifier=x;
-console.log(this.modalIdentifier);
+    this.modalIdentifier=x;
+    console.log(this.modalIdentifier);
   }
   modalFilter(x:number){
     return this.modalIdentifier==x;
