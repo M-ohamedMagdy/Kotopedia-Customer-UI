@@ -9,7 +9,7 @@
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                    <h6 class="mb-0 text-muted">{{cartproducts.length}} items</h6>
+                    <h6 class="mb-0 text-muted">{{userCart.userCart.length}} items</h6>
                   </div>
                   <hr class="my-4">
 
@@ -17,10 +17,10 @@
 
                   <!-- this is the card -->
 
-                  <div  *ngFor="let x of cartproducts let y=index" class="row mb-4 d-flex justify-content-between align-items-center">
+                  <div  *ngFor="let x of userCart.userCart let y=index" class="row mb-4 d-flex justify-content-between align-items-center">
                     <div class="col-md-2 col-lg-2 col-xl-2">
                       <img
-                        [src]="x.src"
+                        [src]="x.photo"
                         class="img-fluid rounded-3 w-200 h-300  " alt="Cotton T-shirt">
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">

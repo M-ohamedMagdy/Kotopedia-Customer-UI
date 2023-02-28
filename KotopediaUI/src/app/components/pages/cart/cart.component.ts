@@ -14,6 +14,7 @@ export class CartComponent {
 
 cartproducts: { src: string; name: string; category: string; unitPrice: number; }[] = [];
   headers: { authorization: any; };
+  userCart: any;
   constructor(public myservice:AppHttpService,private local: LocalStorageService){
     this.headers = {
       authorization:this.local.get('token')
@@ -22,6 +23,8 @@ cartproducts: { src: string; name: string; category: string; unitPrice: number; 
 
 this.myservice.getAllfromCart(this.headers).subscribe({
   next:res=>{
+    this.userCart=res;
+    console.log(this.userCart.userCart);
      console.log(res) ;
 
       },
