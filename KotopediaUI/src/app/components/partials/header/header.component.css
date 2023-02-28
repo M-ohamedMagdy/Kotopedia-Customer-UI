@@ -14,7 +14,15 @@ li a:hover{
   background-color: var(--color2);
 }
 
+.header-container{
+  height: 75px;
+}
+
 .user-dropdown{
   background-color: var(--color1);
 }
 
+#userimg{
+  height: 40px;
+  border-radius: 50%;
+}

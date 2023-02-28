@@ -1,22 +1,15 @@
-<div class="row">
-  <div class="col-12">
-    <div  class="row user_col" *ngIf="token">
-      <span class="col-1 "><img  id ="userimg" [src]="user.photo" alt="user_photo"></span>
-      <span class="col-1 ml-1 user_name" >{{user.name}}</span>
+  <!-- <div class="row text-center ">
+    <div class="col m-auto imgdiv">
+      <img src="../../../../assets/wel.png" id="welImg">
+    </div>
+  </div> -->
+<div class="main">
+  <div class="container">
+  <div class="row text-center py-3">
+    <div *ngFor="let x of Allproducts let y=index" class="px-0 col-8 col-md-4 d-flex flex-column align-items-center">
+      <a (click)="toProductByCategory(y)"> <img [src]="x.src" class="catimg"> </a>
+      <a (click)="toProductByCategory(y)">  <h2 class="catname">{{x.category}}</h2> </a>
     </div>
   </div>
-
-  <div class="row col-12 text-center">
-
-    <div class="col-12 col-md-4 col-lg-2 wel_text">
-      <img src="../../../../assets/welcome.png" id="welImg" alt="" >
-    </div>
-    </div>
-
-  <div class="row row-cols-1 row-cols-md-3 g-4 column2">
-    <div *ngFor="let x of Allproducts let y=index" class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
-      <a  (click)="toProductByCategory(y)"   > <img [src]="x.src" alt="" class="" height="200px"> </a>
-      <a   (click)="toProductByCategory(y)" ><h2 class="mt-1">{{x.category}}</h2></a>
-    </div>
-  </div>
-  </div>
+</div>
+</div>

@@ -10,7 +10,7 @@
     </button>
     <!-- list carries [home, about, registeration, userName, cart] -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
         <!-- home -->
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
@@ -30,12 +30,11 @@
         <!-- user -->
         <li class="nav-item dropdown" *ngIf="token">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{user.name}}
+           <img id="userimg" src="{{user.photo}}"> {{user.name}}
           </a>
           <ul class="dropdown-menu user-dropdown">
             <li><a class="dropdown-item" routerLink="/userProfile">Profile</a></li>
             <li><a class="dropdown-item" routerLink="/order">Orders</a></li>
-            <li><a class="dropdown-item" routerLink="/home">Logout</a></li>
           </ul>
         </li>
         <!-- cart -->
@@ -47,7 +46,7 @@
           <!-- <a class="nav-link" routerLink="/cart">Cart</a> -->
         </li>
         <li class="nav-item" *ngIf="token" (click)="logout()">
-          <a class="nav-link" >Log out</a>
+          <a class="nav-link" href="/home">Log out</a>
         </li>
       </ul>
     </div>
