@@ -39,7 +39,12 @@
 /* End */
 
 /* side bar */
-.column1 a{
+button.contain{
+  border: none;
+}
+
+.column1 a
+{
   color: var(--color4);
   background-color: var(--color2);
 }

@@ -9,7 +9,7 @@
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                    <h6 class="mb-0 text-muted">{{userCart.userCart.length}} items</h6>
+                    <h6 class="mb-0 text-muted">{{Cart.userCart.length}} items</h6>
                   </div>
                   <hr class="my-4">
 
@@ -17,28 +17,29 @@
 
                   <!-- this is the card -->
 
-                  <div  *ngFor="let x of userCart.userCart let y=index" class="row mb-4 d-flex justify-content-between align-items-center">
+                  <!-- <div  *ngFor="let x of cartproducts let y=index" class="row mb-4 d-flex justify-content-between align-items-center"> -->
+                  <div  *ngFor="let x of Cart.userCart let y=index" class="row mb-4 d-flex justify-content-between align-items-center">
                     <div class="col-md-2 col-lg-2 col-xl-2">
                       <img
                         [src]="x.photo"
                         class="img-fluid rounded-3 w-200 h-300  " alt="Cotton T-shirt">
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted">{{x.name}}</h6>
+                      <h6 class="text-muted">{{x.title}}</h6>
                       <h6 class="text-black mb-0">{{x.category}}</h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                       <button class="btn btn-link px-2"
                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
+                        <i class="fas fa-minus" (click)="getQuNeg(Qu.value,x.title)"></i>
                       </button>
 
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
+                      <input id="form1" #Qu min="0" name="quantity" value="{{x.quantity}}" type="number"
                         class="form-control form-control-sm" style="min-width: 50px;" />
 
                       <button class="btn btn-link px-2"
                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-plus" (click)="getQuPos(Qu.value,x.title)"></i>
                       </button>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
@@ -63,8 +64,8 @@
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">items {{cartproducts.length}}</h5>
-                    <h5>€ {{price}}</h5>
+                    <h5 class="text-uppercase">items</h5>
+                    <h5>{{Cart.userCart.length}}</h5>
                   </div>
 
 
