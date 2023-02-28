@@ -41,16 +41,12 @@ user:any;
 FeedBackBody:any;
 modalIdentifier:any;
 feedBacks:any;
-<<<<<<< HEAD
 cartBody:any;
 
-=======
 ProductID:any;
-userID:any;
 Products:any;
 headers:any;
 product:any;
->>>>>>> 2c6005f1caa4b8a78cc457d4715974503c01c09d
   // move it to allproducts page
 
   constructor(public myService:AppHttpService,private local: LocalStorageService,private router: Router){
@@ -59,8 +55,7 @@ product:any;
     }
     this.user=this.myService.getUser();
     console.log(this.user);
-    this.userID=this.user._id;
-    console.log(this.userID);
+
 
   }
 
@@ -107,7 +102,6 @@ product:any;
     console.log(this.Products[x]);
     if(this.indicator[x]){
       this.CartButton[x]="Remove";
-<<<<<<< HEAD
       this.cartBody={userID:this.user._id,bookID:this.Products[x]._id};
       this.myService.addToCart(this.cartBody).subscribe(
         {
@@ -121,8 +115,6 @@ product:any;
         }
       );
 
-=======
->>>>>>> 2c6005f1caa4b8a78cc457d4715974503c01c09d
     }
     else{
       this.CartButton[x]="Add To Cart";
@@ -139,22 +131,7 @@ console.log(err);
     this.local.set('CartButton',this.CartButton);
     // console.log(product); product:any,
   }
-  getProductD(product:any){
-    console.log(product);
-    this.ProductID=product._id;
-    console.log(this.ProductID)
-    console.log(this.userID);
-    this.myService.addtoCart(this.userID,this.ProductID,this.headers).subscribe(
-      {
-        next:res=>{
-          console.log(res);
-        },error:err=>{
-          console.log(err);
 
-        }
-      }
-    )
-  }
   search(x:any){
     console.log(x);
   }

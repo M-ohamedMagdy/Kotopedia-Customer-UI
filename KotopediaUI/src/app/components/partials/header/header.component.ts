@@ -13,6 +13,12 @@ export class HeaderComponent implements OnChanges  {
     this.token=this.myService.getToken();
 console.log(this.token);
 this.user=this.myService.getUser();
+setTimeout(function() {
+  myService.removeToken();
+  window.location.href = "/registeration";
+}, 11500);
+
+
   }
 
   ngOnChanges() {

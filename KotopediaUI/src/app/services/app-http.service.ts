@@ -85,24 +85,6 @@ addFeedback(feed:any){
   return this.myClient.post(this.BaseURLAddFeedBack,feed);
 }
 
-//add to cart
-addtoCart(userID:any,bookID:any,headers:any){
-  return this.myClient.post(`${this.BaseURLGetCustomer}/cart`,{userID,bookID},{headers})
-}
-
-//get user cart
-gerCart(headers:any){
-  return this.myClient.get( `${this.BaseURLGetCustomer}/cart/${this.user._id}`,{headers});
-}
-
-// update quatity of cart product
-updateProductQuatity(userID:string,title:string,quantity:any,headers:any){
-  return this.myClient.patch(`${this.BaseURLGetCustomer}/cart`,{userID,title,quantity},{headers});
-}
-
-
-
-
 
   //local storage token and user
   //set token and user come only from log in page
@@ -145,20 +127,25 @@ getFeedBacks(x:any){
 
 }
 
-//add to cart
+//add to cart abanoub
 addToCart(body:any){
 
   return this.myClient.post(this.BaseURLaddToCart,body,this.httpOptions);
 }
 
-//remove from cart
-removefromCart(x:any){
-  return this.myClient.delete(this.BaseURLaddToCart+`/${this.user._id}/${x}`,this.httpOptions);
+//remove from cart by book title
+removefromCart(title:any){
+  return this.myClient.delete(this.BaseURLaddToCart+`/${this.user._id}/${title}`,this.httpOptions);
 
 }
 getAllfromCart(headers:any){
   return this.myClient.get(this.BaseURLaddToCart+`/${this.user._id}`,{headers});
 
+}
+
+// update quatity of cart product
+updateProductQuatity(userID:string,title:string,quantity:any,headers:any){
+  return this.myClient.patch(`${this.BaseURLGetCustomer}/cart`,{userID,title,quantity},{headers});
 }
 
 

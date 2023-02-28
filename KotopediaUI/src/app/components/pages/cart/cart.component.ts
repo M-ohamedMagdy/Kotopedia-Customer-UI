@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { LocalStorageService } from 'angular-web-storage';
-import { AppHttpService } from 'src/app/services/app-http.service';
 import { ProuductsService } from 'src/app/services/prouducts.service';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { LocalStorageService } from 'angular-web-storage';
@@ -17,8 +15,10 @@ export class CartComponent {
   headers:any;
   Cart:any;
   quantity:any;
+  userCart: any;
 
-  constructor(public ser:ProuductsService,private myService:AppHttpService,private local: LocalStorageService ){
+
+  constructor(private myService:AppHttpService,private local: LocalStorageService ){
     this.headers = {
       authorization:this.local.get('token')
   }
@@ -32,11 +32,63 @@ export class CartComponent {
         error(err){console.log(err)}
       }
     )
+    this.myService.getAllfromCart(this.headers).subscribe({
+      next:res=>{
+        this.Cart=res;
+        this.userCart=this.Cart.userCart;
+        console.log(this.Cart.userCart);
+         console.log(res) ;
 
-    this.myService.gerCart(this.headers).subscribe({
+          },
+      error:err=>{console.log(err);}
+          });
+
+
+
+    // this.cartproducts=ser.getCartProducts();
+    // console.log(this.cartproducts);
+  }
+
+  x:number=1;
+  price:number=this.x*44;
+  removeCart(x:any){
+    this.myService.removefromCart(this.userCart[x].title).subscribe({
+      next:(res)=>{
+        console.log(res);
+        // this.userCart = this.userCart.filter((abanoub:any) => abanoub.title !== this.userCart[x].title);
+
+      },
+      error:(err)=>{
+console.log(err);
+      }
+    });
+  }
+  getQuPos(q:any,title:any){
+    console.log(+q+1)
+    this.quantity=+q+1;
+    console.log(this.quantity);
+    console.log(this.user._id);
+    console.log(title);
+
+    this.myService.updateProductQuatity(this.user._id,title,this.quantity,this.headers).subscribe({
       next:res=>{
         console.log(res);
-        this.Cart=res;
+      },error:err=>{
+        console.log(err);
+
+      }
+    })
+  }
+  getQuNeg(q:any,title:any){
+    console.log(+q-1)
+    this.quantity=+q-1;
+    console.log(this.quantity);
+    console.log(this.user._id);
+    console.log(title);
+
+    this.myService.updateProductQuatity(this.user._id,title,this.quantity,this.headers).subscribe({
+      next:res=>{
+        console.log(res);
       },error:err=>{
         console.log(err);
 
@@ -44,16 +96,16 @@ export class CartComponent {
     })
 
 
-cartproducts: { src: string; name: string; category: string; unitPrice: number; }[] = [];
-  constructor(public ser:ProuductsService){
-this.cartproducts=ser.getCartProducts();
-console.log(this.cartproducts);
+
+
+
+
+
+
   }
-x:number=1;
-price:number=this.x*44;
-removeCart(x:number){
-  this.ser.RemoveFromCart(x);
-}
+
+
+
 }
 
 
