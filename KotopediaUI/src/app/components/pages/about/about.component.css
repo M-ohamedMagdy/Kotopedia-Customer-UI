@@ -1,15 +1,21 @@
 div.container{
-  background-image: url(../../../../assets/books1.jpg);
+  background-image: url('../../../../assets/background.jpg');
   min-height : 100%;
   min-width : 100%;
   background-size:100% 100%;
   background-repeat:no-repeat;
   overflow: hidden;
-  color: var(--color4);
+  color: var(--color1);
 }
 .textContent{
   font-size: 25px;
   line-height: 1.5;
-  height: fit-content;
+  /* height: fit-content; */
   padding: 50px;
+}
+
+@media (max-width: 500px) {
+  .textContent{
+    font-size: 15px;
+  }
 }

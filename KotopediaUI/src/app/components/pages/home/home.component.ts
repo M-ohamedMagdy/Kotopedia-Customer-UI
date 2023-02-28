@@ -15,12 +15,12 @@ import { Router } from '@angular/router';
 export class HomeComponent {
     Allproducts: { src: string ,category:string}[] =
     [
-    { "src": "../../../../assets/img9.jfif","category" :"Romantic"},
-    { "src": "../../../../assets/img10.jfif","category" :"fantasy"},
-    { "src": "../../../../assets/img11.jfif","category" :"children"},
-    { "src": "../../../../assets/img20.jfif","category" :"business"},
-    { "src": "../../../../assets/home_images/hist.jpg","category" :"history"},
-    { "src": "../../../../assets/img19.jfif","category" :"crime"}
+    { "src": "../../../../assets/img9.jpg","category" :"Romantic"},
+    { "src": "../../../../assets/img10.jpg","category" :"Fantasy"},
+    { "src": "../../../../assets/img11.PNG","category" :"Children"},
+    { "src": "../../../../assets/img20.jpg","category" :"Business"},
+    { "src": "../../../../assets/img88.PNG","category" :"History"},
+    { "src": "../../../../assets/img19.jpg","category" :"Crime"}
 ];
 @Output()  MyEvent=new EventEmitter();
 token:any;
