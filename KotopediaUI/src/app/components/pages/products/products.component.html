@@ -29,6 +29,9 @@
           </a>
           <a  *ngFor="let x of Allproducts let y=index" (click)="toProductByCategory(y)"
             class="list-group-item list-group-item-action">{{Allproducts[y].category}}</a>
+            <a  href="/products" class="list-group-item list-group-item-action " aria-current="true">
+              <b> All Categories</b>
+            </a>
 
         </div>
 
@@ -132,6 +135,10 @@
           </div>
         </div>
         <hr />
+
+        <!-- //////////////////////////////////test//////////////////// -->
+        <!-- //////////////////////////////////test//////////////////// -->
+
 
         <!-- Pagination -->
         <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">

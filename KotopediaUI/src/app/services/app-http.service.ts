@@ -35,6 +35,8 @@ products:any;
   private BaseURLAddFeedBack = "https://kotopedia-backend.onrender.com/customer/feedbacks";
   private BaseURLAddCustomer = "https://kotopedia-backend.onrender.com/customer/signup";
   private  BaseURLGetProductByCat="https://kotopedia-backend.onrender.com/customer/products";
+  private  BaseURLaddToCart="https://kotopedia-backend.onrender.com/customer/cart";
+
   private token:any;
   BaseURLGetProduct:any;
 
@@ -114,7 +116,21 @@ getFeedBacks(x:any){
 
 }
 
+//add to cart
+addToCart(body:any){
 
+  return this.myClient.post(this.BaseURLaddToCart,body,this.httpOptions);
+}
+
+//remove from cart
+removefromCart(x:any){
+  return this.myClient.delete(this.BaseURLaddToCart+`/${this.user._id}/${x}`,this.httpOptions);
+
+}
+getAllfromCart(headers:any){
+  return this.myClient.get(this.BaseURLaddToCart+`/${this.user._id}`,{headers});
+
+}
 
 
 

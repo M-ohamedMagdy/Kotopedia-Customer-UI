@@ -1,7 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component , EventEmitter, OnInit, Output  } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
-import { ProuductsService } from 'src/app/services/prouducts.service';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
 
@@ -41,6 +40,7 @@ user:any;
 FeedBackBody:any;
 modalIdentifier:any;
 feedBacks:any;
+cartBody:any;
 
   // move it to allproducts page
 
@@ -70,8 +70,8 @@ console.log(this.user);
       next:(res)=>{
         if(this.myService.getProduct()){this.Products = this.myService.getProduct();this.myService.setProduct(null);}
         else if(!this.myService.getProduct()){this.Products = res;}
-          for(this.i=0;this.i<this.Products.length;this.i++){ this.CartButton.push("Add To Cart") }
-          for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true) }
+          for(this.i=0;this.i<this.Products.length;this.i++){ this.CartButton.push("Add To Cart");   this.local.set('cartButton',this.CartButton);}
+          for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true);this.local.set('indicators',this.indicator); }
           console.log(this.CartButton);
       },
       error(err){console.log(err)}
@@ -89,10 +89,30 @@ console.log(this.user);
   addToCart(x:number){
     if(this.indicator[x]){
       this.CartButton[x]="Remove";
+      this.cartBody={userID:this.user._id,bookID:this.Products[x]._id};
+      this.myService.addToCart(this.cartBody).subscribe(
+        {
+
+          next:res=>{
+            console.log(res);
+          },
+          error:err=>{
+            console.log(err);
+          }
+        }
+      );
 
     }
     else{
       this.CartButton[x]="Add To Cart";
+      this.myService.removefromCart(this.Products[x].title).subscribe({
+        next:(res)=>{
+          console.log(res);
+        },
+        error:(err)=>{
+console.log(err);
+        }
+      });
     }
     this.indicator[x] = !this.indicator[x];
     this.local.set('CartButton',this.CartButton);

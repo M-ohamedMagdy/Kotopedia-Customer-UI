@@ -20,7 +20,7 @@
         </li>
         <!-- Books -->
         <li class="nav-item" *ngIf="token">
-          <a class="nav-link" routerLink="/products">Books</a>
+          <a class="nav-link" href="/products">Books</a>
         </li>
         <!-- login/signup -->
         <li class="nav-item"  *ngIf="!token" >
@@ -34,7 +34,6 @@
           <ul class="dropdown-menu user-dropdown">
             <li><a class="dropdown-item" routerLink="/userProfile">Profile</a></li>
             <li><a class="dropdown-item" routerLink="/order">Orders</a></li>
-            <li><a class="dropdown-item" routerLink="/home">Logout</a></li>
           </ul>
         </li>
         <!-- cart -->
