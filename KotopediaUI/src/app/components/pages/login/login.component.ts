@@ -62,6 +62,7 @@ sendUserData(){
         console.log(this.currentUser);
         console.log(this.currentUser.token)
         this.myService.setUser(this.currentUser.user);
+        this.myService.setToken(this.currentUser.token);
         console.log(this.currentUser.user)
         setTimeout(function() {
           window.location.href = "/home";
