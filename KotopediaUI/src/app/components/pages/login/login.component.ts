@@ -48,12 +48,14 @@ sendUserData(){
         icon: 'success',
         title: 'Logged in successfully ',
         showConfirmButton: false,
-        timer: 1300
+        timer: 2000
       })
       this.currentUser = res;
       if(this.currentUser.user.role === "admin"){
         document.cookie = `token=${this.currentUser.token}`;
-        window.location.href = "http://localhost:4202/";
+        setTimeout(function() {
+          window.location.href = "http://localhost:4202/";
+        },2000)
       }
       else{
 
