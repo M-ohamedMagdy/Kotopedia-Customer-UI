@@ -89,7 +89,7 @@ addtoCart(userID:any,bookID:any,headers:any){
 }
 
 //get user cart
-gerCart(headers:any){
+getCart(headers:any){
   return this.myClient.get( `${this.BaseURLGetCustomer}/cart/${this.user._id}`,{headers});
 }
 
@@ -98,6 +98,15 @@ updateProductQuatity(userID:string,title:string,quantity:any,headers:any){
   return this.myClient.patch(`${this.BaseURLGetCustomer}/cart`,{userID,title,quantity},{headers});
 }
 
+//add cart to orders
+addCartToOrders(userID:string,headers:any){
+  return this.myClient.post(`${this.BaseURLGetCustomer}/orders`,{userID},{headers})
+}
+
+// get all user orders
+getAllOrders(headers:any){
+  return this.myClient.get(`${this.BaseURLGetCustomer}/orders/${this.user._id}`,{headers});
+}
 
 
 
