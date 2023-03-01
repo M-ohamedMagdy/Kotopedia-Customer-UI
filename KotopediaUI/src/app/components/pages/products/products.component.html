@@ -7,7 +7,7 @@
           <form class="d-flex" role="search">
             <input class="form-control me-2 rounded-pill"
             type="search" placeholder="Search" aria-label="Search" ng-model="searchText"  #text>
-            <button class="btn btn-outline rounded-pill px-4" type="submit"  (click)="search(text.value)">Search</button>
+            <button class="btn btn-outline rounded-pill px-4" type="submit"  (click)="search(text.value) ">Search</button>
           </form>
       </div>
   </div>
@@ -40,20 +40,22 @@
 
       <!-- content -->
       <div class="col-lg-9">
-        <header class="d-sm-flex justify-content-end  border-bottom mb-4 pb-3 me-auto">
-          <strong class="d-block py-2  px-2 ">{{Products.length}} Items found </strong>
-
-        </header>
+        <div  *ngFor="let x of Products  | filter:text.value
+        let y=index let z=count ">
+          <header *ngIf="y<1" class="d-sm-flex justify-content-end  border-bottom mb-4 pb-3 me-auto">
+            <strong class="d-block py-2  px-2 ">{{z}} Items found </strong>
+          </header>
+        </div>
 
         <div class="row"  >
-          <div class="col-lg-4 col-md-6 col-sm-6 d-flex" *ngFor="let x of Products | filter:text.value
-           let y=index let z=count " value={{z}}
+          <div class="col-lg-4 col-md-6 col-sm-6 d-flex" *ngFor="let x of Products  | filter:text.value
+           let y=index let z=count "
           >
             <div class="card w-100 my-2 shadow-2-strong">
               <img [src]="x.photo" class="card-img-top" />
               <div class="card-body d-flex flex-column">
                 <div class="d-flex flex-row">
-                  <h5 class="mb-1 me-1">${{x.unitPrice}}</h5>
+                  <h5 class="mb-1 me-1" >${{x.unitPrice}}</h5>
                   <span class="text-danger"><s>${{x.unitPrice+(0.1*x.unitPrice)}}</s></span>
                 </div>
                 <p class="card-text">{{x.title}}</p>

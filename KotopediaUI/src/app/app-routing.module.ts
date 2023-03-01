@@ -7,16 +7,18 @@ import { ProductsComponent } from './components/pages/products/products.componen
 import { CartComponent } from './components/pages/cart/cart.component';
 import { PayementComponent } from './components/pages/payement/payement.component';
 import { ProfileComponent } from "./components/pages/profile/profile.component";
+import { AuthenticationGuard } from './authentication.guard';
 
 const routes: Routes = [
                           {path:"", component:HomeComponent},
                           {path:"home", component:HomeComponent},
                           {path:"about",component:AboutComponent},
                           {path:"registeration", component:RegisterationComponent},
-                          {path:"products",component:ProductsComponent},
-                          {path:"cart",component:CartComponent},
-                          {path:"pay",component:PayementComponent},
-                          {path:"userProfile",component:ProfileComponent}
+                          {path:"products",component:ProductsComponent,canActivate:[AuthenticationGuard]},
+                          {path:"cart",component:CartComponent,canActivate:[AuthenticationGuard]},
+                          {path:"pay",component:PayementComponent,canActivate:[AuthenticationGuard]},
+                          {path:"userProfile",component:ProfileComponent,canActivate:[AuthenticationGuard]},
+
                         ];
 
 @NgModule({

@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
 // };
 Allproducts: { src: string ,category:string}[] =
     [
-    { "src": "../../../../assets/img9.jfif","category" :"Romantic"},
+    { "src": "../../../../assets/img9.jfif","category" :"romantic"},
     { "src": "../../../../assets/img10.jfif","category" :"fantasy"},
     { "src": "../../../../assets/img11.jfif","category" :"children"},
     { "src": "../../../../assets/img20.jfif","category" :"business"},
@@ -50,6 +50,7 @@ product:any;
 Cart:any;
 userCart:any;
 titles:string[]=[];
+numberOfItems:any;
   // move it to allproducts page
 
   constructor(public myService:AppHttpService,private local: LocalStorageService,private router: Router){
@@ -108,6 +109,7 @@ titles:string[]=[];
                     this.indicator.push(true);
                    }
                 }
+                this.numberOfItems=this.Products.length;
                 console.log(this.CartButton);
               console.log(this.Products)
             },
@@ -195,6 +197,12 @@ getFeedBacks(x:any){
     },
     error(err){console.log(err)}
   })
+}
+
+//////////////////////////////////////
+setNumberofitems(x:any){
+this.numberOfItems=x;
+console.log(this.numberOfItems);
 }
 
   }
