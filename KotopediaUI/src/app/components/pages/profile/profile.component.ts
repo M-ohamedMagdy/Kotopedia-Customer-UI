@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { LocalStorageService } from 'angular-web-storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -34,12 +35,13 @@ export class ProfileComponent implements OnInit {
 
 
     this.UpdatingForm = this.formBulider.group({
-      name: ['', [Validators.maxLength(12), Validators.minLength(3)]],
+      name: ['', [Validators.maxLength(15), Validators.minLength(3)]],
       email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       gender: [''],
-      password: ['', [Validators.maxLength(12), Validators.minLength(6)]],
+      password: ['', [Validators.maxLength(16), Validators.minLength(8)]],
       photo: [],
     })
+
   }
 
   ngOnInit(): void {
@@ -51,6 +53,7 @@ export class ProfileComponent implements OnInit {
           this.userImage = this.user.photo;
         },
         error(err) { console.log(err) }
+
       }
     )
 
@@ -76,18 +79,20 @@ export class ProfileComponent implements OnInit {
     return !this.UpdatingForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase) characters or digits' : '';
   }
 
-  updateUserInfo(newUserData: any) {
-    this.userID = newUserData._id;
-    this.UpdatingForm = this.formBulider.group({
-      name: [this.user.name, [Validators.maxLength(12), Validators.minLength(3)]],
-      email: [this.user.email, [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      gender: [this.user.gender],
-      password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(6)]],
-      photo: [[]]
+  updateUserInfo(newUserData:any){
+      this.userID = newUserData._id;
+      console.log(this.userID);
+      this.UpdatingForm = this.formBulider.group({
+      name:[this.user.name,[Validators.maxLength(12),Validators.minLength(3)]],
+      email:[this.user.email,[Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      gender:[this.user.gender],
+      password:['',[Validators.maxLength(12),Validators.minLength(6)]],
+      photo:[]
     })
   }
 
-  updateOne() {
+  updateOne(){
+    if(this.UpdatingForm.valid){
     try {
       const fd = new FormData();
       fd.append('id', this.userID);
@@ -109,7 +114,14 @@ export class ProfileComponent implements OnInit {
           console.log(err);
         }
       })
-    } catch (error) { console.log(error) }
-
+      } catch (error) { console.log(error) }
+    }else{
+      console.log("not valid");
+      Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid Data Entry',
+          })
+    }
   }
 }

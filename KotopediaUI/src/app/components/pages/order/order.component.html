@@ -3,57 +3,59 @@
     <i class="fa-regular fa-shield-check"></i>
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
-        <div class="card card-registration card-registration-2 mb-3" style="border-radius: 15px;" *ngFor="let x of ordersArr.userOrders">
-          <div class="card-body p-0" >
-            <div class="row g-0" >
+        <div class="card card-registration card-registration-2 mb-3" style="border-radius: 15px;"
+          *ngFor="let x of ordersArr.userOrders">
+          <div class="card-body p-0">
+            <div class="row g-0">
               <div class="col-lg-8">
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Orders</h1>
                   </div>
                   <hr class="my-4">
-                <div class="row mb-4 d-flex justify-content-between align-items-center"  >
-                  <div class="col-md-3 col-lg-3 col-xl-3">
-                    <h6 class="mb-0 text-muted"> {{x.length}} items</h6>
-                    <h5 class="text-muted">Order ID: {{x._id}}</h5>
-                    <h5 class="text-muted">Date: {{x.date}}</h5>
-                    <h5 class="text-muted">Status: {{x.status}}</h5>
-                  </div>
-                  <div  class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div *ngFor="let z of x.productsInOrder">
-                      <div class="col-md-2 col-lg-2 col-xl-2">
-                        <img [src]="z.photo" class="img-fluid rounded-3 w-200 h-300  " alt="Cotton T-shirt">
-                      </div>
-                      <div class="col-md-3 col-lg-3 col-xl-3">
-                        <span class="text-muted">{{z.title}}</span>
-                        <span class="text-black mb-0">{{z.category}}</span>
-                        <span class="text-black mb-0">{{z.quantity}}</span>
-                      </div>
+                  <div class="row mb-4 d-flex justify-content-between align-items-center">
+                    <div class=" col-lg-5 col-xl-5 col-12">
+                      <h6 class="mb-0"><b>{{x.length}} items</b></h6>
+                      <h5 class="text-muted">Order ID: {{x._id}}</h5>
+                      <h5 class="text-muted">Date: {{x.date}}</h5>
+                      <h5 class="">Status:<b> {{x.status}}</b></h5>
+                    </div>
+                    <hr>
+                    <div class="row d-flex justify-content-around align-items-center">
+                      <div class="row my_ord" *ngFor="let z of x.productsInOrder">
+                        <div class="col-lg-3 col-xl-3 col-12 text-center">
+                          <img [src]="z.photo" class="img-fluid rounded-3 bk_img  " alt="Cotton T-shirt">
+                        </div>
+                        <div class="col-lg-5 col-xl-5 col-12 text-center align-items-center mt-4">
+                          <span class=""><b>{{z.title}}</b></span>
+                          <h5 class="text-black mb-0">Category :{{z.category}}</h5>
+                          <h6 class="text-black mb-0">Quantity :<b> {{z.quantity}}</b></h6>
+                        </div>
 
-                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                        <h6 class="mb-0">EGP{{z.unitPrice}}</h6>
+                        <div class=" col-lg-3 col-xl-3 col-12 text-center offset-lg-1 mt-4">
+                          <h6 class="mb-0"><b>EGP{{z.unitPrice}}</b></h6>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
                   <!-- this is the card -->
 
-                  <hr class="my-4">
+                  <hr class="">
 
                   <div class="pt-5">
                     <h6 class="mb-0"><a routerLink="/cart" class="text-body"><i
-                          class="fas fa-long-arrow-alt-left me-2" ></i>Back to cart</a></h6>
+                          class="fas fa-long-arrow-alt-left me-2"></i>Back to cart</a></h6>
                   </div>
                 </div>
               </div>
 
               <!--summary-->
-                <div class="col-lg-4 bg-grey" >
-                  <div class="p-5">
-                    <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                    <hr class="my-4">
-                  <div class="d-flex justify-content-between mb-4" >
+              <div class="col-lg-4 bg-grey">
+                <div class="p-5">
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                  <hr class="my-4">
+                  <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase">items: {{x.productsInOrder.length}}</h5>
                   </div>
                   <hr class="my-4">
@@ -68,7 +70,8 @@
                     <h5 class="text-uppercase">Status</h5>
                     <h5 class="text-uppercase">{{x.status}}</h5>
                   </div>
-                  <button type="button" class="btn btn-dark btn-block btn-lg" (click)="cancelOrder(x._id)"  data-mdb-ripple-color="dark" >Cancel Order</button>
+                  <button type="button" class="btn btn-dark btn-block btn-lg" (click)="cancelOrder(x._id)"
+                    data-mdb-ripple-color="dark">Cancel Order</button>
 
                 </div>
               </div>

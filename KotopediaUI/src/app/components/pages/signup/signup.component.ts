@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { HttpClient } from '@angular/common/http';
-import Swal from 'sweetalert2';
 import { SendUserDataService } from 'src/app/services/send-user-data.service';
+import Swal from 'sweetalert2';
 
 
 @Component({

@@ -1,57 +1,27 @@
-.CheckBtn i{
+.CheckBtn i {
   margin-left: 5px;
 }
 
-  button{
-    background-color: var(--color1);
-    border-color: var(--color1);
-  }
-  button:hover{
-    background-color: var(--color1);
-    opacity: 0.9;
-    color: var(--color4);
-  }
-  .bg-grey {
-    background-color: #eae8e8;
-    }
-
-
-/*
-@media (min-width: 1025px) {
-  .h-custom {
-  height: 100vh !important;
-  }
-  }
-
-  .card-registration .select-input.form-control[readonly]:not([disabled]) {
-  font-size: 2rem;
-  line-height: 2.15;
-  padding-left: .75em;
-  padding-right: .75em;
-  }
-
-  .card-registration .select-arrow {
-  top: 13px;
-  }
-
-  @media (min-width: 992px) {
-  .card-registration-2 .bg-grey {
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
-  }
-  }
-
-  @media (max-width: 991px) {
-  .card-registration-2 .bg-grey {
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  }
+button {
+  background-color: var(--color1);
+  border-color: var(--color1);
 }
 
-  @media (min-width: 992px){
-  .col-lg-3 {
-      flex: 0 0 auto;
-      width: 70%;
-  }
-  }
- */
+button:hover {
+  background-color: var(--color1);
+  opacity: 0.9;
+  color: var(--color4);
+}
+
+.bg-grey {
+  background-color: #eae8e8;
+}
+
+.bk_img {
+  height: 180px;
+  width: 150px;
+}
+
+.my_ord {
+  margin-top: 2%;
+}
