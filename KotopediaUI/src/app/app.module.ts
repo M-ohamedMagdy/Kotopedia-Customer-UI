@@ -26,6 +26,7 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MatIconModule} from '@angular/material/icon';
 import { OrderComponent } from './components/pages/order/order.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -62,9 +63,7 @@ import { OrderComponent } from './components/pages/order/order.component';
     CommonModule,
     BrowserAnimationsModule,
     Ng2SearchPipeModule,
-
-
-
+    NgxPaginationModule
   ],
 
   providers: [

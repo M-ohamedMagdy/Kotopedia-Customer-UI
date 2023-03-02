@@ -125,7 +125,6 @@ export class CartComponent implements OnInit {
           timer: 3000
         })
         this.emptyCart();
-        location.href = "http://localhost:4201/order";
       }, error: err => {
         console.log(err);
 

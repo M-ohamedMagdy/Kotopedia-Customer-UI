@@ -5,6 +5,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -12,10 +13,24 @@ import Swal from 'sweetalert2';
 })
 
 export class ProductsComponent implements OnInit {
+  //way to send token to backend
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': `${this.myService.getToken()}` // Here is the token
+  //   })
+  // };
+
+  p: number = 1;
+  itemperpage: number = 12;
+  totalitems: any;
+
+
+
 
   Allproducts: { src: string, category: string }[] =
     [
-      { "src": "../../../../assets/img9.jfif", "category": "romantic" },
+      { "src": "../../../../assets/img9.jfif", "category": "Romantic" },
       { "src": "../../../../assets/img10.jfif", "category": "fantasy" },
       { "src": "../../../../assets/img11.jfif", "category": "children" },
       { "src": "../../../../assets/img20.jfif", "category": "business" },
@@ -58,7 +73,6 @@ export class ProductsComponent implements OnInit {
 
     this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
       next: res => {
-        console.log(res);
         this.myService.setProduct(res);
         window.location.reload();
       },
@@ -110,75 +124,76 @@ export class ProductsComponent implements OnInit {
   }
 
 
-addToCart(x: number) {
-  console.log(this.Products[x]);
-  if (this.indicator[x]) {
-    this.CartButton[x] = "Remove";
-    this.cartBody = { userID: this.user._id, bookID: this.Products[x]._id };
-    this.myService.addtoCart(this.userID, this.Products[x]._id, this.headers).subscribe(
+  addToCart(x: number) {
+    console.log(this.Products[x]);
+    if (this.indicator[x]) {
+      this.CartButton[x] = "Remove";
+      this.cartBody = { userID: this.user._id, bookID: this.Products[x]._id };
+      this.myService.addtoCart(this.userID, this.Products[x]._id, this.headers).subscribe(
+        {
+          next: res => {
+            console.log(res);
+          }, error: err => {
+            console.log(err);
+
+          }
+        }
+      );
+    }
+    else {
+      this.CartButton[x] = "Add To Cart";
+      this.myService.removefromCart(this.Products[x].title).subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
+
+        }
+      });
+    }
+    this.indicator[x] = !this.indicator[x];
+    this.local.set('CartButton', this.CartButton);
+  }
+
+  getProductD(product: any) {
+    console.log(product);
+    this.ProductID = product._id;
+    console.log(this.ProductID)
+    console.log(this.userID);
+    this.myService.addtoCart(this.userID, this.ProductID, this.headers).subscribe(
       {
         next: res => {
           console.log(res);
         }, error: err => {
           console.log(err);
+
         }
       }
-    );
+    )
   }
-  else {
-    this.CartButton[x] = "Add To Cart";
-    this.myService.removefromCart(this.Products[x].title).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
 
-      }
-    });
-  }
-  this.indicator[x] = !this.indicator[x];
-  this.local.set('CartButton', this.CartButton);
-}
-
-getProductD(product: any) {
-  console.log(product);
-  this.ProductID = product._id;
-  console.log(this.ProductID)
-  console.log(this.userID);
-  this.myService.addtoCart(this.userID, this.ProductID, this.headers).subscribe(
-    {
+  BuyNow(prod: any) {
+    console.log(prod);
+    this.ProductID = prod._id;
+    this.myService.addtoOrders(this.userID, this.ProductID, this.headers).subscribe({
       next: res => {
         console.log(res);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your order is submitted,Once it is accepted ,the shipping company will contact you ',
+          showConfirmButton: false,
+          timer: 3000
+        })
       }, error: err => {
         console.log(err);
-
       }
-    }
-  )
-}
-
-BuyNow(prod: any) {
-  console.log(prod);
-  this.ProductID = prod._id;
-  this.myService.addtoOrders(this.userID, this.ProductID, this.headers).subscribe({
-    next: res => {
-      console.log(res);
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Your order is submitted,Once it is accepted ,the shipping company will contact you ',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    }, error: err => {
-      console.log(err);
-    }
-  })
-}
+    })
+  }
 
 
-  search(x:any){
+  search(x: any) {
     console.log(x);
   }
 
@@ -215,11 +230,12 @@ BuyNow(prod: any) {
 
 
   //////////////////////////////////////
-  setNumberofitems(x:any){
-    this.numberOfItems=x;
+  setNumberofitems(x: any) {
+    this.numberOfItems = x;
     console.log(this.numberOfItems);
   }
 
+  getOne(searchValue: any) {
+    throw new Error('Method not implemented.');
+  }
 }
-
-
