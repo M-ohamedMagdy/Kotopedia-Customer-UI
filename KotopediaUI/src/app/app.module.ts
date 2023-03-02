@@ -25,6 +25,8 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MatIconModule} from '@angular/material/icon';
+import { OrderComponent } from './components/pages/order/order.component';
+
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import {MatIconModule} from '@angular/material/icon';
     CartComponent,
     AboutComponent,
     ProfileComponent,
+    OrderComponent,
     ],
 
   imports: [

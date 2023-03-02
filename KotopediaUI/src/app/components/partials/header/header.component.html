@@ -30,10 +30,10 @@
         <!-- user -->
         <li class="nav-item dropdown" *ngIf="token">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           <img id="userimg" src="{{user.photo || defaultImg}}"> {{user.name}}
+           <img id="userimg" src="{{user.photo}}"> {{user.name}}
           </a>
           <ul class="dropdown-menu user-dropdown">
-            <li><a class="dropdown-item" routerLink="/userProfile">Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
             <li><a class="dropdown-item" routerLink="/order">Orders</a></li>
           </ul>
         </li>

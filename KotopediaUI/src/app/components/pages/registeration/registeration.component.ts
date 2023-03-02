@@ -9,17 +9,6 @@ import { Component, OnChanges ,OnInit} from '@angular/core';
   styleUrls: ['./registeration.component.css']
 })
 export class RegisterationComponent  {
-  constructor(){}
-  // implements OnInit
-  // constructor(public myService:AppHttpService ) {
 
-  // }
-
-  // ngOnInit(): void {
-  //   this.myService.getAllCustomers().subscribe(
-  //     (res)=>{console.log(res)},
-  //     (err)=>{console.log(err)}
-  //   )
-  // }
 }
 

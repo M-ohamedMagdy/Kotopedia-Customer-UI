@@ -1,4 +1,4 @@
-import { Component, OnChanges } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
 
 @Component({
@@ -6,14 +6,26 @@ import { AppHttpService } from 'src/app/services/app-http.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnChanges  {
-  token:any;
-  user:any;
-  defaultImg = "./user.jpg";
-  constructor(private myService:AppHttpService){
-    this.token=this.myService.getToken();
-console.log(this.token);
-this.user=this.myService.getUser();
+export class HeaderComponent implements OnInit,OnChanges {
+  token: any;
+  user: any;
+
+  constructor(private myService: AppHttpService) {
+    this.token = this.myService.getToken();
+    console.log(this.token);
+    this.user = this.myService.getUser();
+  }
+
+  ngOnInit() : void {
+    this.myService.getUserInfo().subscribe(
+      {
+        next: (res) => {
+          console.log(res)
+          this.user = res;
+        },
+        error(err) { console.log(err) }
+      }
+    )
   }
 
   ngOnChanges() {
@@ -21,7 +33,7 @@ this.user=this.myService.getUser();
 
   }
 
-  logout(){
+  logout() {
     this.myService.removeToken();
     window.location.href = "/home";
   }

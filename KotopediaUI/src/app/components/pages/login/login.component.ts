@@ -18,72 +18,65 @@ export class LoginComponent {
   hide = true;
 
   constructor(
-     private myServ : SendUserDataService,
-      private local: LocalStorageService,
-      private myService:AppHttpService,
-      private router: Router ) { }
+    private myServ: SendUserDataService,
+    private local: LocalStorageService,
+    private myService: AppHttpService,
+    private router: Router) { }
 
   loginForm = new FormGroup({
-    email : new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-    password : new FormControl('',[Validators.required,Validators.pattern(new RegExp('^[a-zA-Z0-9]{8,16}$'))])
+    email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    password: new FormControl('', [Validators.required, Validators.pattern(new RegExp('^[a-zA-Z0-9]{8,16}$'))])
   })
 
-  get emailValid(){
+  get emailValid() {
     return !this.loginForm.controls.email.value ? 'You must enter a value'
-    : !this.loginForm.controls['email'].valid ? 'Invalid email format' : '';
+      : !this.loginForm.controls['email'].valid ? 'Invalid email format' : '';
   }
 
-  get passwordValid(){
+  get passwordValid() {
     return !this.loginForm.controls['password'].value ? 'You must enter a value'
-    : !this.loginForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase) characters or digits' : '';
+      : !this.loginForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase) characters or digits' : '';
   }
 
-currentUser:any;
-x:any;
-y:any;
+  currentUser: any;
+  x: any;
+  y: any;
 
-sendUserData(){
-  this.myServ.sendLoginData({email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value}).subscribe({
-    next: res => {
-      Swal.fire({
-        // position: 'top-end',
-        icon: 'success',
-        title: 'Logged in successfully ',
-        showConfirmButton: false,
-        timer: 2000
-      })
-      this.currentUser = res;
-      if(this.currentUser.user.role === "admin"){
-        document.cookie = `token=${this.currentUser.token}`;
-        setTimeout(function() {
-          window.location.href = "http://localhost:4202/";
-        },2000)
-      }
-      else{
+  sendUserData() {
+    this.myServ.sendLoginData({ email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value }).subscribe({
+      next: res => {
+        Swal.fire({
+          // position: 'top-end',
+          icon: 'success',
+          title: 'Logged in successfully ',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        this.currentUser = res;
+        if (this.currentUser.user.role === "admin") {
+          document.cookie = `token=${this.currentUser.token}`;
+          setTimeout(function () {
+            window.location.href = "http://localhost:4202/";
+          }, 2000)
+        }
+        else {
+          this.myService.setUser(this.currentUser.user);
+          this.myService.setToken(this.currentUser.token);
+          setTimeout(function () {
+            window.location.href = "/home";
+          }, 1500);
 
-        console.log(this.currentUser);
-        console.log(this.currentUser.token)
-        this.myService.setUser(this.currentUser.user);
-        this.myService.setToken(this.currentUser.token);
-        console.log(this.currentUser.user)
-        setTimeout(function() {
-          window.location.href = "/home";
-        }, 1500);
+        }
 
-      }
-
-    },
-    error: err => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Invalid email or password!',
-      })
-      this.loginForm.reset();
-      console.log({email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value});
-      console.log(err);
-    },
-  })
-}
-
+      },
+      error: err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Invalid email or password!',
+        })
+        this.loginForm.reset();
+      },
+    })
+  }
 }

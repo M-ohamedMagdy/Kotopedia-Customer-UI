@@ -32,6 +32,7 @@ products:any;
 
    }
   private BaseURLGetCustomer = "https://kotopedia-backend.onrender.com/customer";
+  private BaseURLAddFeedBack = "https://kotopedia-backend.onrender.com/customer/feedbacks";
   private BaseURLAddCustomer = "https://kotopedia-backend.onrender.com/customer/signup";
   private  BaseURLGetProductByCat="https://kotopedia-backend.onrender.com/customer/products";
   private token:any;
@@ -67,14 +68,83 @@ return this.products;
         this.myClient.post(this.BaseURLAddCustomer,newUser);
   }
 
+//get user info on login
+getUserInfo(){
+  return this.myClient.get(`${this.BaseURLGetCustomer}/profile/${this.user._id}`,this.httpOptions)
+}
+
+//update user data
+updateUserData(userData:object, headers:any){
+  return this.myClient.patch(this.BaseURLGetCustomer+'/profile',userData,{headers});
+}
+
+//add feedback
+addFeedback(feed:any){
+  return this.myClient.post(this.BaseURLAddFeedBack,feed);
+}
+
+//add to cart
+addtoCart(userID:any,bookID:any,headers:any){
+  return this.myClient.post(`${this.BaseURLGetCustomer}/cart`,{userID,bookID},{headers})
+}
+
+//get user cart
+getCart(headers:any){
+  return this.myClient.get( `${this.BaseURLGetCustomer}/cart/${this.user._id}`,{headers});
+}
+
+// update quatity of cart product
+updateProductQuatity(userID:string,title:string,quantity:any,headers:any){
+  return this.myClient.patch(`${this.BaseURLGetCustomer}/cart`,{userID,title,quantity},{headers});
+}
+
+//add cart to orders
+addCartToOrders(userID:string,headers:any){
+  return this.myClient.post(`${this.BaseURLGetCustomer}/orders`,{userID},{headers})
+}
+
+//order one item
+addtoOrders(userID:string,bookID:string,headers:any){
+  return this.myClient.post(`${this.BaseURLGetCustomer}/orders`,{userID,bookID},{headers})
+}
+
+// get all user orders
+getAllOrders(headers:any){
+  return this.myClient.get(`${this.BaseURLGetCustomer}/orders/${this.user._id}`,{headers});
+}
+
+//remove from cart by book title
+removefromCart(title:any){
+  return this.myClient.delete(`${this.BaseURLGetCustomer}/cart/${this.user._id}/${title}`,this.httpOptions);
+
+}
+
+//Empty cart
+emptyCart(headers:any){
+  return this.myClient.delete(`${this.BaseURLGetCustomer}/cart/${this.user._id}`,{headers});
+}
+
+
+//cancel order
+cancelOrder(orderID:any,headers:any){
+  return this.myClient.delete(`${this.BaseURLGetCustomer}/orders/${this.user._id}/${orderID}`,{headers})
+}
+
+
+
+
+
+
+
   //local storage token and user
   //set token and user come only from log in page
 setToken(x:any){
   this.local.set('token',x);
   this.token=this.local.get('token');
 }
+
 getToken(){
- return this.token;
+  return this.token;
 }
 removeToken(){
   this.local.set('token',null);
@@ -88,25 +158,17 @@ return  this.user;
 }
 getProductsByCategory(category:any){       //Done
   return this.myClient.get(this.BaseURLGetProductByCat+`/${category}/${this.user._id}`,this.httpOptions);
-
-  // this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
-  //   next:res=>{
-  //      console.log(res) ;
-  //      this.myService.setCatProducts(res) ;
-
-
-  }
+}
 
 
 setSend(){
   return this.local.get('sentData');
-
 }
 
+getFeedBacks(x:any){
+  return this.myClient.get(this.BaseURLAddFeedBack+`/${x}`);
 
-
-
-
+}
 
 
 }

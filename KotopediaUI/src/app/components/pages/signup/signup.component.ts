@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { SendUserDataService } from 'src/app/services/send-user-data.service';
+
 
 @Component({
   selector: 'app-signup',
@@ -17,18 +19,14 @@ export class SignupComponent {
   genders: any[] = [{ value: 'Male' }, { value: 'Female' }];
 
   hide = true;
-  // ngDoCheck(): void {
-  //   this.passwordsNotEqual = this.signupForm.controls['confirmationPassword'].value !== this.signupForm.controls['password'].value;
-  // }
 
-
-  constructor(private formBulider: FormBuilder, public myService: AppHttpService, private http: HttpClient) {
+  constructor(private formBulider: FormBuilder, public myService: AppHttpService, private http: HttpClient, private myServ: SendUserDataService) {
     this.signupForm = this.formBulider.group({
       name: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(6)]],
-      gender: [''],
-      photo: [[],],
+      gender: ['', Validators.required],
+      photo: [[]],
     })
   }
 
@@ -42,26 +40,12 @@ export class SignupComponent {
       : !this.signupForm.controls['email'].valid ? 'Invalid email format' : '';
   }
 
-
-  get emailValid() {
-    return !this.signupForm.controls['email'].value ? 'You must enter a value'
-      : !this.signupForm.controls['email'].valid ? 'Not a valid email' : '';
-  }
-
   get passwordNotValid() {
     return !this.signupForm.controls['password'].value ? 'You must enter a value'
       : !this.signupForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase) characters or digits' : '';
   }
 
-  // get confirmationPasswordNotValid(){
-  //   return !this.signupForm.controls['confirmationPassword'].value ? 'You must enter a value'
-  //   : !this.signupForm.controls['confirmationPassword'].valid ? 'Invalid password format'
-  //   : this.signupForm.controls['confirmationPassword'].value !== this.signupForm.controls['password'].value
-  //   ? 'Please enter the same password' : '';
-  // }
-
   selectedFile: File | any = null;
-  // defaultPhoto:File|any =  ;
 
   getPhoto(event: any) {
     console.log(event);
@@ -70,7 +54,7 @@ export class SignupComponent {
   }
 
   signUp() {
-    if(this.signupForm.valid){
+    if (this.signupForm.valid) {
       try {
         const fd = new FormData();
         fd.append('name', this.signupForm.get('name')?.value);
@@ -83,18 +67,20 @@ export class SignupComponent {
         }
 
         console.log(fd)
-        this.http.post("https://kotopedia-backend.onrender.com/customer/signup", fd).subscribe(
-          res => {
+        this.myServ.sendSignupData(fd).subscribe({
+          next: res => {
             console.log(res);
-            console.log(this.signupForm.value);
+            location.href = '/home';
+          }, error: err => {
+            console.log(err);
           }
-        )
+        })
       } catch (error) {
         console.log(error);
       }
 
     }
-    else{
+    else {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -102,6 +88,5 @@ export class SignupComponent {
         timer: 2000
       })
     }
-
   }
 }

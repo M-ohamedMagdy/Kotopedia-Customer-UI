@@ -3,16 +3,14 @@
   <!-- Jumbotron -->
   <div class="p-3 text-center bg-white border-bottom">
     <div class="container">
-      <div class="row gy-3">
-        <div class="searchB">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 rounded-pill"
-            type="search" placeholder="Search" aria-label="Search" ng-model="searchText"  #text>
-            <button class="btn btn-outline rounded-pill px-4" type="submit"  (click)="search(text.value)">Search</button>
-          </form>
+      <div class="searchB">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search"
+            ng-model="searchText" #text>
+          <button class="btn btn-outline rounded-pill px-4" type="submit" (click)="search(text.value)">Search</button>
+        </form>
       </div>
     </div>
-  </div>
   </div>
   <!-- Jumbotron -->
 
@@ -26,10 +24,10 @@
       <!-- sidebar -->
       <div class="col-lg-3 mt-5">
         <div class="list-group column1">
-          <a  class="list-group-item list-group-item-action T " aria-current="true">
+          <a class="list-group-item list-group-item-action T " aria-current="true">
             <b> Search by Category</b>
           </a>
-          <a  *ngFor="let x of Allproducts let y=index" (click)="toProductByCategory(y)"
+          <a *ngFor="let x of Allproducts let y=index" (click)="toProductByCategory(y)"
             class="list-group-item list-group-item-action">{{Allproducts[y].category}}</a>
 
         </div>
@@ -44,28 +42,103 @@
 
         </header>
 
-        <div class="row"  >
+        <div class="row">
           <div class="col-lg-4 col-md-6 col-sm-6 d-flex" *ngFor="let x of Products | filter:text.value
-           let y=index let z=count " value={{z}}
-          >
+           let y=index let z=count " value={{z}}>
             <div class="card w-100 my-2 shadow-2-strong">
               <img [src]="x.photo" class="card-img-top" />
               <div class="card-body d-flex flex-column">
                 <div class="d-flex flex-row">
                   <h5 class="mb-1 me-1">${{x.unitPrice}}</h5>
-                  <span class="text-danger"><s>${{x.unitPrice+(0.1*x.unitPrice)}}</s></span>
+                  <span class="text-danger"><s>${{x.unitPrice+(0.5*x.unitPrice)}}</s></span>
                 </div>
                 <p class="card-text">{{x.title}}</p>
                 <p class="card-text">{{x.author}}</p>
-                <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                  <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
-                  <a href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
+                <p class="card-text d-flex  justify-content-between">
+
+                  <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@mdo"
+                    (click)="setModalIdentifier(y)" (click)="getFeedBacks(x.title)" style="color:var(--color1);"> Read
+                    More</a>
+                  <a style="color:var(--color1);" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-bs-whatever="@mdo" (click)="setModalIdentifier(y)">Feed back</a>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div *ngFor="let x of Products let my=index" class="modal-dialog">
+
+
+                    <div *ngIf="my==modalIdentifier" class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Feed back</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Email:</label>
+                            <input type="text" class="form-control" id="recipient-name" value={{user.email}} readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Feed back:</label>
+                            <textarea class="form-control" id="message-text" #fb></textarea>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                          (click)="addFeedBack(x.title,fb.value)">Send </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ////////////////////////////////////////// read more modal  /////////////////////////////////////////// -->
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div *ngFor="let x of Products let my=index" class="modal-dialog">
+
+
+                    <div *ngIf="my==modalIdentifier" class="modal-content">
+                      <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabel">{{x.title}}</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <img [src]="x.photo" class="card-img-top" />
+
+                        </div>
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label">Description:</label>
+                          <p class="form-control" id="message-text">{{x.description}}</p>
+                        </div>
+                        <h3>feedBacks</h3>
+                        <div *ngFor="let x of feedBacks">
+                          <p>{{x.body}}</p>
+                          <p>{{x.email}}</p>
+                          <p>{{x.date}}</p>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- ///////////////////////////////////////////////////////////////////// -->
+
+
+
+                <!-- </p> -->
+                <div class="card-footer d-flex justify-content-between pt-3 px-0 pb-0 mt-auto">
+                  <!-- (click)="getProductD(x) -->
+                  <button (click)="addToCart(y)" class="btn btn-dark"><a>{{CartButton[y]}}</a></button>
+                  <button (click)="BuyNow(x)" class="btn btn-success"><a>Buy Now</a></button>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <hr />
+        <hr/>
 
         <!-- Pagination -->
         <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
@@ -92,54 +165,3 @@
     </div>
   </div>
 </section>
-<!-- sidebar + content -->
-
-
-
-<hr>
-<hr>
-<hr>
-<hr>
-
-<div class="mainCont">
-
-  <div class="searchB">
-    <form class="d-flex" role="search">
-      <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" #text>
-      <button class="btn btn-outline rounded-pill px-4" type="submit" (click)="search(text.value)">Search</button>
-    </form>
-  </div>
-
-<div class="layout">
-  <div class="list-group column1">
-    <a  class="list-group-item list-group-item-action T " aria-current="true">
-      <b> Search by Category</b>
-    </a>
-    <a  *ngFor="let x of Allproducts let y=index" (click)="toProductByCategory(y)"
-      class="list-group-item list-group-item-action">{{Allproducts[y].category}}</a>
-
-  </div>
-  <!--break point  -->
-  <hr>
-
-  <hr>
-<div class="row row-cols-1 row-cols-md-3 g-4 column2">
-  <div style="max-height: 200px;" *ngFor="let x of Products | filter:text.value let y=index " class="col-md-4 mt-2  ml-2 d-grid  col-12 align-items-center" style="justify-items:center ;">
-    <div class="card"  >
-          <img [src]="x.photo" alt="" class="card-img-top">
-      <div class="card-body">
-        <h3 class="card-title">{{x.title}}</h3>
-        <b>EGP {{x.unitPrice}}</b>
-        <p class="card-text">{{x.description}}</p>
-        <div class="d-flex justify-content-between btnsL">
-          <a  class="btn btn-primary m-auto" (click)="addToCart(y)"> {{CartButton[y]}}</a>
-          <a href="/pay" class="btn btn-primary m-auto">Buy Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- E -->
-
-  </div>
-</div>
-</div>
