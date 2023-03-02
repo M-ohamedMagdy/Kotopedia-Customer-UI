@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { FormControl, FormGroup, Validators ,FormBuilder } from '@angular/forms';
 import { LocalStorageService } from 'angular-web-storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -25,11 +26,23 @@ export class ProfileComponent implements OnInit,AfterViewInit {
   ];
 
   constructor(private myService:AppHttpService ,private formBulider:FormBuilder, private local: LocalStorageService){
-
     this.headers = {
       authorization:this.local.get('token')
     }
+    this.UpdatingForm = this.formBulider.group({
+      name:['',[Validators.required,Validators.maxLength(12),Validators.minLength(3)]],
+      email:['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      gender:[''],
+      password:['',[Validators.maxLength(12),Validators.minLength(6)]],
+      photo:[],
+    })
 
+
+    this.token=this.myService.getToken();
+    console.log(this.token);
+  }
+
+  ngOnInit(): void {
     this.myService.getUserInfo().subscribe(
       {
         next:(res)=>{
@@ -40,21 +53,6 @@ export class ProfileComponent implements OnInit,AfterViewInit {
         error(err){console.log(err)}
       }
     )
-    this.token=this.myService.getToken();
-    console.log(this.token);
-
-
-  this.UpdatingForm = this.formBulider.group({
-      name:['',[Validators.maxLength(12),Validators.minLength(3)]],
-      email:['',[Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      gender:[''],
-      password:['',[Validators.maxLength(12),Validators.minLength(6)]],
-      photo:[],
-    })
-  }
-
-  ngOnInit(): void {
-
 
   }
 
@@ -89,12 +87,16 @@ export class ProfileComponent implements OnInit,AfterViewInit {
       name:[this.user.name,[Validators.maxLength(12),Validators.minLength(3)]],
       email:[this.user.email,[Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       gender:[this.user.gender],
-      password:['',[Validators.required,Validators.maxLength(12),Validators.minLength(6)]],
+      password:['',[Validators.maxLength(12),Validators.minLength(6)]],
       photo:[]
     })
   }
 
   updateOne(){
+    if(this.UpdatingForm.valid){
+      console.log("valid");
+
+
     console.log(this.token);
     try {
       const fd = new FormData();
@@ -130,6 +132,15 @@ export class ProfileComponent implements OnInit,AfterViewInit {
         }
       })
       } catch (error) { console.log(error) }
+    }else{
+      console.log("not valid");
+      Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid Data Entry',
+          })
+    }
+
 
   }
 }

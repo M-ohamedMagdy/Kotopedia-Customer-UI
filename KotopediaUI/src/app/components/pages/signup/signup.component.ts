@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators ,FormBuilder } from '@angular/forms'
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { HttpClient } from '@angular/common/http';
 import { SendUserDataService } from 'src/app/services/send-user-data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -59,32 +60,35 @@ export class SignupComponent {
   }
 
   signUp(){
-    try {
+    if(this.signupForm.valid){
+      try {
       const fd = new FormData();
-    fd.append('name',this.signupForm.get('name')?.value);
-    fd.append('email',this.signupForm.get('email')?.value);
-    fd.append('password',this.signupForm.get('password')?.value);
-    fd.append('gender',this.signupForm.get('gender')?.value);
-    fd.append('photo',this.selectedFile,this.selectedFile.name);
-    console.log(fd)
-    this.myServ.sendSignupData(fd).subscribe({
-      next:res=>{
-        console.log(res);
-        location.href='/home';
-      },error:err=>{
-        console.log(err);
+      fd.append('name',this.signupForm.get('name')?.value);
+      fd.append('email',this.signupForm.get('email')?.value);
+      fd.append('password',this.signupForm.get('password')?.value);
+      fd.append('gender',this.signupForm.get('gender')?.value);
+      fd.append('photo',this.selectedFile,this.selectedFile.name);
+      console.log(fd)
+      this.myServ.sendSignupData(fd).subscribe({
+        next:res=>{
+          console.log(res);
+          location.href='/home';
+        },error:err=>{
+          console.log(err);
 
+        }
+      })
+      } catch (error) {
+        console.log(error);
       }
-    })
-    // this.http.post("http://localhost:3000/customer/signup",fd).subscribe(
-    //   res=>{
-    //     console.log(res);
-    //     console.log(this.signupForm.value);
-    //   }
-    // )
-    } catch (error) {
-      console.log(error);
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Invalid Data Entry',
+      })
     }
+
 
   }
 }
