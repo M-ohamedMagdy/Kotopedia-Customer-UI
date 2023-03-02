@@ -1,6 +1,7 @@
 body{
   background-color: var(--color4);
 }
+
 .bg{
   width: 100%;
   min-height: 35vh;
@@ -12,6 +13,7 @@ body{
 .bg .container{
   overflow: hidden;
 }
+
 .userImg{
   border-radius: 50%;
   position: absolute;
@@ -34,9 +36,11 @@ body{
  z-index: 111111;
  text-align: center;
 }
+
 .changepic:hover{
 display: block;
 }
+
 .camera{
   position: absolute;
  font-size: 35px;
@@ -44,6 +48,7 @@ display: block;
  top: 6rem;
  color: var(--color1);
 }
+
 .changepic h6{
   position: absolute;
   left: 1.6rem;
@@ -92,18 +97,22 @@ border-bottom: 5px var(--color1);
 .done{
   display: none;
 }
+
 @media (max-width: 1200px) {
   .userImg{
    width: 150px;
    height: 150px;
+   top:9rem;
   }}
 
 @media (max-width: 800px) {
  .userImg{
   width: 120px;
   height: 120px;
+  top:10.5rem;
 
  }
+
  .changepic{
   width: 150px;
   height: 150px;

@@ -150,3 +150,23 @@ color: gray;
 .cat:hover{
   cursor: pointer;
 }
+
+.column1{
+  margin-bottom: 200px;
+}
+
+.spinner-grow{
+  color: var(--color1);
+  width: 3rem;
+  height: 3rem;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+}
+
+@media (max-width:995px){
+  .column1{
+    margin-bottom: 0px;
+  }
+}

@@ -15,3 +15,10 @@
 .cancelIcon i:hover {
   cursor: pointer;
 }
+
+.bk_img{
+  height: 180px;
+  width: 150px;
+}
+
+

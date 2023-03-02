@@ -2,7 +2,7 @@
   background-color: var(--color1);
   color: var(--color4);
   width: 100%;
-  height: 14vh;
+  height: fit-content;
 }
 
 hr{

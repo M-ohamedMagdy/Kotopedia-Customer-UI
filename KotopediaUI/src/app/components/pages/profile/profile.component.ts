@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { LocalStorageService } from 'angular-web-storage';
 import Swal from 'sweetalert2';
 
@@ -31,9 +31,6 @@ export class ProfileComponent implements OnInit {
       authorization: this.local.get('token')
     }
     this.token = this.myService.getToken();
-
-
-
     this.UpdatingForm = this.formBulider.group({
       name: ['', [Validators.maxLength(15), Validators.minLength(3)]],
       email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
@@ -41,7 +38,6 @@ export class ProfileComponent implements OnInit {
       password: ['', [Validators.maxLength(16), Validators.minLength(8)]],
       photo: [],
     })
-
   }
 
   ngOnInit(): void {

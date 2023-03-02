@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit {
 
   Allproducts: { src: string, category: string }[] =
     [
-      { "src": "../../../../assets/img9.jfif", "category": "Romantic" },
+      { "src": "../../../../assets/img9.jfif", "category": "romantic" },
       { "src": "../../../../assets/img10.jfif", "category": "fantasy" },
       { "src": "../../../../assets/img11.jfif", "category": "children" },
       { "src": "../../../../assets/img20.jfif", "category": "business" },
@@ -81,8 +81,14 @@ export class ProductsComponent implements OnInit {
   }
 
 
-
+  loader=true;
   ngOnInit(): void {
+
+    setTimeout(() => {
+      this.loader=false;
+       }, 2000);
+
+
     //here i am going to get all titles in cart so determine if add to cart or remove
     this.myService.getAllfromCart(this.headers).subscribe({
       next: res => {

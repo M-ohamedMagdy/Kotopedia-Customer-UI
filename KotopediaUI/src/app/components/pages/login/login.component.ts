@@ -65,13 +65,6 @@ export class LoginComponent {
   sendUserData() {
     this.myServ.sendLoginData({ email: this.loginForm.controls['email'].value, password: this.loginForm.controls['password'].value }).subscribe({
       next: res => {
-        Swal.fire({
-          // position: 'top-end',
-          icon: 'success',
-          title: 'Logged in successfully ',
-          showConfirmButton: false,
-          timer: 2000
-        })
         this.currentUser = res;
         if (this.currentUser.user.role === "admin") {
           document.cookie = `token=${this.currentUser.token}`;
@@ -80,12 +73,10 @@ export class LoginComponent {
           }, 2000)
         }
         else {
+          this.local.set('fs',true);
           this.myService.setUser(this.currentUser.user);
           this.myService.setToken(this.currentUser.token);
-          setTimeout(function () {
             window.location.href = "/home";
-          }, 1500);
-
         }
 
       },
