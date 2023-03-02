@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { LocalStorageService } from 'angular-web-storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order',
@@ -8,7 +9,7 @@ import { LocalStorageService } from 'angular-web-storage';
   styleUrls: ['./order.component.css']
 })
 
-export class OrderComponent {
+export class OrderComponent implements OnInit {
   user:any;
   userID:any;
   headers:any;
@@ -27,23 +28,46 @@ export class OrderComponent {
         error(err){console.log(err)}
       }
     )
+  }
+
+  ngOnInit(): void {
     this.myService.getAllOrders(this.headers).subscribe({
       next:(res)=>{
         console.log(res)
         this.ordersArr=res;
-        console.log(this.ordersArr.userOrders[0].productsInOrder.length);
-
-        console.log(this.ordersArr.userOrders[0].productsInOrder[0].title);
-
-        console.log(this.ordersArr.userOrders);
-
       },
       error(err){console.log(err)}
     })
-
-
   }
 
+
+  cancelOrder(orderID:any){
+    console.log(orderID);
+
+    this.myService.cancelOrder(orderID,this.headers).subscribe({
+      next:res=>{
+        console.log(res);
+        this.ngOnInit();
+      },error:err=>{
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Can not cancel an order after being accepted or rejected',
+        })
+      }
+    })
+  }
+
+  checkorder(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your order is submitted,Once it is accepted we will inform you to contact delivery ',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
 
 }
 

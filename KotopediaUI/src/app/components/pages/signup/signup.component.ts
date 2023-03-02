@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators ,FormBuilder } from '@angular/forms';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { HttpClient } from '@angular/common/http';
+import { SendUserDataService } from 'src/app/services/send-user-data.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,12 +16,9 @@ export class SignupComponent {
 
   genders: any[] = [{value: 'Male'},{value: 'Female'}];
 
-  // ngDoCheck(): void {
-  //   this.passwordsNotEqual = this.signupForm.controls['confirmationPassword'].value !== this.signupForm.controls['password'].value;
-  // }
 
 
-  constructor( private formBulider:FormBuilder ,public myService:AppHttpService ,private http:HttpClient ) {
+  constructor( private formBulider:FormBuilder ,public myService:AppHttpService ,private http:HttpClient ,private myServ:SendUserDataService) {
     this.signupForm = this.formBulider.group({
       name:['',[Validators.required,Validators.maxLength(12),Validators.minLength(3)]],
       email:['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
@@ -51,12 +49,7 @@ export class SignupComponent {
     : !this.signupForm.controls['password'].valid ? 'Invalid password format, password should be 8 - 16 (lowercase or uppercase)characters or digits' : '';
   }
 
-  // get confirmationPasswordNotValid(){
-  //   return !this.signupForm.controls['confirmationPassword'].value ? 'You must enter a value'
-  //   : !this.signupForm.controls['confirmationPassword'].valid ? 'Invalid password format'
-  //   : this.signupForm.controls['confirmationPassword'].value !== this.signupForm.controls['password'].value
-  //   ? 'Please enter the same password' : '';
-  // }
+
 
   selectedFile:File|any =null ;
   getPhoto(event:any) {
@@ -74,12 +67,21 @@ export class SignupComponent {
     fd.append('gender',this.signupForm.get('gender')?.value);
     fd.append('photo',this.selectedFile,this.selectedFile.name);
     console.log(fd)
-    this.http.post("http://localhost:3000/customer/signup",fd).subscribe(
-      res=>{
+    this.myServ.sendSignupData(fd).subscribe({
+      next:res=>{
         console.log(res);
-        console.log(this.signupForm.value);
+        location.href='/home';
+      },error:err=>{
+        console.log(err);
+
       }
-    )
+    })
+    // this.http.post("http://localhost:3000/customer/signup",fd).subscribe(
+    //   res=>{
+    //     console.log(res);
+    //     console.log(this.signupForm.value);
+    //   }
+    // )
     } catch (error) {
       console.log(error);
     }

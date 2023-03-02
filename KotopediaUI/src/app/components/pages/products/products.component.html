@@ -51,7 +51,7 @@
               <div class="card-body d-flex flex-column">
                 <div class="d-flex flex-row">
                   <h5 class="mb-1 me-1">${{x.unitPrice}}</h5>
-                  <span class="text-danger"><s>${{x.unitPrice+(0.1*x.unitPrice)}}</s></span>
+                  <span class="text-danger"><s>${{x.unitPrice+(0.5*x.unitPrice)}}</s></span>
                 </div>
                 <p class="card-text">{{x.title}}</p>
                 <p class="card-text">{{x.author}}</p>
@@ -110,6 +110,8 @@
           <h3>feedBacks</h3>
           <div *ngFor="let x of feedBacks">
             <p>{{x.body}}</p>
+            <p>{{x.email}}</p>
+            <p>{{x.date}}</p>
 
           </div>
       </div>
@@ -123,10 +125,9 @@
 
         <!-- </p> -->
                 <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                  <!-- <button (click)="getProductD(x)" class="contain"> -->
-                    <a  class="btn btn-primary shadow-0 me-1" (click)="addToCart(y) " (click)="getProductD(x)">{{CartButton[y]}}</a>
-                  <!-- </button> -->
-                  <a href="/pay" class="btn btn-primary m-auto">Buy Now</a>
+                  <!-- (click)="getProductD(x) -->
+                    <a  class="btn btn-primary shadow-0 me-1" (click)="addToCart(y) " >{{CartButton[y]}}</a>
+                  <a (click)="BuyNow(x)" class="btn btn-primary m-auto">Buy Now</a>
 
                 </div>
               </div>

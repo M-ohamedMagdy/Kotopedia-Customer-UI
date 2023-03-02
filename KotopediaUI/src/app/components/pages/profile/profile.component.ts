@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
 import { FormControl, FormGroup, Validators ,FormBuilder } from '@angular/forms';
-import { SendUserDataService } from 'src/app/services/send-user-data.service';
-import { HttpHeaders } from '@angular/common/http';
 import { LocalStorageService } from 'angular-web-storage';
 
 @Component({

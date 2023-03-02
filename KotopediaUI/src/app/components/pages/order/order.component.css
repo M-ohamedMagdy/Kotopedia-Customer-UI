@@ -1,3 +1,22 @@
+.CheckBtn i{
+  margin-left: 5px;
+}
+
+  button{
+    background-color: var(--color1);
+    border-color: var(--color1);
+  }
+  button:hover{
+    background-color: var(--color1);
+    opacity: 0.9;
+    color: var(--color4);
+  }
+  .bg-grey {
+    background-color: #eae8e8;
+    }
+
+
+/*
 @media (min-width: 1025px) {
   .h-custom {
   height: 100vh !important;
@@ -13,10 +32,6 @@
 
   .card-registration .select-arrow {
   top: 13px;
-  }
-
-  .bg-grey {
-  background-color: #eae8e8;
   }
 
   @media (min-width: 992px) {
@@ -39,4 +54,4 @@
       width: 70%;
   }
   }
-
+ */

@@ -15,7 +15,7 @@ export class SendUserDataService {
   }
 
   sendSignupData(userData:any){
-    return this.myClient.post(this.baseURL+'/login',userData);
+    return this.myClient.post(this.baseURL+'/signup',userData);
   }
 
   getUserData(userId:any){

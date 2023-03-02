@@ -4,6 +4,7 @@ import { AppHttpService } from 'src/app/services/app-http.service';
 import { ProuductsService } from 'src/app/services/prouducts.service';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 
@@ -24,7 +25,7 @@ export class ProductsComponent implements OnInit {
 // };
 Allproducts: { src: string ,category:string}[] =
     [
-    { "src": "../../../../assets/img9.jfif","category" :"Romantic"},
+    { "src": "../../../../assets/img9.jfif","category" :"romantic"},
     { "src": "../../../../assets/img10.jfif","category" :"fantasy"},
     { "src": "../../../../assets/img11.jfif","category" :"children"},
     { "src": "../../../../assets/img20.jfif","category" :"business"},
@@ -47,6 +48,10 @@ userID:any;
 Products:any;
 headers:any;
 product:any;
+Cart:any;
+userCart:any;
+titles:string[]=[];
+cartBody:any;
   // move it to allproducts page
 
   constructor(public myService:AppHttpService,private local: LocalStorageService,private router: Router){
@@ -74,7 +79,11 @@ product:any;
 
     }
   ngOnInit(): void {
-
+    this.myService.getCart(this.headers).subscribe({
+      next:res=>{
+        this.Cart=res;
+        this.userCart=this.Cart.userCart;
+        for(var i=0;i<this.userCart.length;i++){ this.titles.push(this.userCart[i].title)};
   this.myService.getAllProducts().subscribe(
     {
       next:(res)=>{
@@ -82,13 +91,30 @@ product:any;
         this.Products=res;
         if(this.myService.getProduct()){this.Products = this.myService.getProduct();this.myService.setProduct(null);}
         else if(!this.myService.getProduct()){this.Products = res;}
-          for(this.i=0;this.i<this.Products.length;this.i++){ this.CartButton.push("Add To Cart") }
-          for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true) }
+        for(this.i=0;this.i<this.Products.length;this.i++)
+        {
+          if(this.titles.includes(this.Products[this.i].title))
+          {
+            this.CartButton.push("Remove");
+            this.indicator.push(false);
+
+          }
+          else{
+            this.CartButton.push("Add To Cart");
+            this.indicator.push(true);
+          }
+        }
+          // for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true) }
           console.log(this.CartButton);
         console.log(this.Products)
       },
       error(err){console.log(err)}
     })
+    console.log(this.titles);
+
+          },
+      error:err=>{console.log(err);}
+          });
     // console.log(this.Products)
 
 
@@ -103,9 +129,28 @@ product:any;
     console.log(this.Products[x]);
     if(this.indicator[x]){
       this.CartButton[x]="Remove";
+      this.cartBody={userID:this.user._id,bookID:this.Products[x]._id};
+      this.myService.addtoCart(this.userID,this.Products[x]._id,this.headers).subscribe(
+        {
+          next:res=>{
+            console.log(res);
+          },error:err=>{
+            console.log(err);
+
+          }
+        }
+      );
     }
     else{
       this.CartButton[x]="Add To Cart";
+      this.myService.removefromCart(this.Products[x].title).subscribe({
+        next:(res)=>{
+          console.log(res);
+        },
+        error:(err)=>{
+console.log(err);
+        }
+      });
     }
     this.indicator[x] = !this.indicator[x];
     this.local.set('CartButton',this.CartButton);
@@ -127,9 +172,33 @@ product:any;
       }
     )
   }
+
+  BuyNow(prod:any){
+    console.log(prod);
+    this.ProductID=prod._id;
+    this.myService.addtoOrders(this.userID,this.ProductID,this.headers).subscribe({
+      next:res=>{
+        console.log(res);
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your order is submitted,Once it is accepted ,the shipping company will contact you ',
+            showConfirmButton: false,
+            timer: 3000
+          })
+      },error:err=>{
+        console.log(err);
+      }
+    })
+  }
+
+
+
+
   search(x:any){
     console.log(x);
   }
+
 
   addFeedBack(title:any,fb:any){
     console.log(title);

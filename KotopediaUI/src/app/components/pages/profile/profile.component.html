@@ -46,7 +46,7 @@
               <div>
                 <mat-form-field appearance="fill" class="w-100">
                   <mat-label>Gender</mat-label>
-                  <mat-select formControlName="gender">
+                  <mat-select formControlName="gender" >
                     <mat-option style="z-index: 2000;" *ngFor="let g of gender" [value]="g.value">
                       {{g.viewValue}}
                     </mat-option>
@@ -61,7 +61,7 @@
               </div>
               <div class="passwordInput pb-3">
                 <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Enter your password</mat-label>
+                  <mat-label>update your password</mat-label>
                   <input #passwordInput type="password" matInput placeholder="password should be 8 - 16 characters" formControlName="password">
                   <mat-error *ngIf="passwordNotValid">{{passwordNotValid}}</mat-error>
                 </mat-form-field>

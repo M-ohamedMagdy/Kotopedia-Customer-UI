@@ -103,10 +103,35 @@ addCartToOrders(userID:string,headers:any){
   return this.myClient.post(`${this.BaseURLGetCustomer}/orders`,{userID},{headers})
 }
 
+//order one item
+addtoOrders(userID:string,bookID:string,headers:any){
+  return this.myClient.post(`${this.BaseURLGetCustomer}/orders`,{userID,bookID},{headers})
+}
+
 // get all user orders
 getAllOrders(headers:any){
   return this.myClient.get(`${this.BaseURLGetCustomer}/orders/${this.user._id}`,{headers});
 }
+
+//remove from cart by book title
+removefromCart(title:any){
+  return this.myClient.delete(`${this.BaseURLGetCustomer}/cart/${this.user._id}/${title}`,this.httpOptions);
+
+}
+
+//Empty cart
+emptyCart(headers:any){
+  return this.myClient.delete(`${this.BaseURLGetCustomer}/cart/${this.user._id}`,{headers});
+}
+
+
+//cancel order
+cancelOrder(orderID:any,headers:any){
+  return this.myClient.delete(`${this.BaseURLGetCustomer}/orders/${this.user._id}/${orderID}`,{headers})
+}
+
+
+
 
 
 
@@ -117,8 +142,9 @@ setToken(x:any){
   this.local.set('token',x);
   this.token=this.local.get('token');
 }
+
 getToken(){
- return this.token;
+  return this.token;
 }
 removeToken(){
   this.local.set('token',null);
@@ -132,30 +158,17 @@ return  this.user;
 }
 getProductsByCategory(category:any){       //Done
   return this.myClient.get(this.BaseURLGetProductByCat+`/${category}/${this.user._id}`,this.httpOptions);
-
-  // this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
-  //   next:res=>{
-  //      console.log(res) ;
-  //      this.myService.setCatProducts(res) ;
-
-
-  }
+}
 
 
 setSend(){
   return this.local.get('sentData');
-
 }
 
 getFeedBacks(x:any){
   return this.myClient.get(this.BaseURLAddFeedBack+`/${x}`);
 
 }
-
-
-
-
-
 
 
 }
