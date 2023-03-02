@@ -21,19 +21,9 @@ export class AuthenticationGuard implements CanActivate {
 
 if(this.myService.getToken()){return true;}
 else{
+  alert("you need to  sign in before going to this page  ");
   this.router.navigate(['/registeration']);
-setTimeout(() => {
 
-}, 1000);
-  Swal.fire({
-    title: 'Please Sign in to see Our Books !!',
-    showClass: {
-      popup: 'animate__animated animate__fadeInDown'
-    },
-    hideClass: {
-      popup: 'animate__animated animate__fadeOutUp'
-    }
-  })
 
 
 
