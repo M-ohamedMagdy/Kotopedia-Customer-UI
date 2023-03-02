@@ -61,7 +61,8 @@ import { OrderComponent } from './components/pages/order/order.component';
     MatSelectModule,
     CommonModule,
     BrowserAnimationsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+
 
 
   ],

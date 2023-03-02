@@ -1,7 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AppHttpService } from 'src/app/services/app-http.service';
-import { ProuductsService } from 'src/app/services/prouducts.service';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -34,15 +33,16 @@ export class ProductsComponent implements OnInit {
   FeedBackBody: any;
   modalIdentifier: any;
   feedBacks: any;
-  ProductID: any;
+  cartBody: any;
   userID: any;
+  ProductID: any;
   Products: any;
   headers: any;
   product: any;
   Cart: any;
   userCart: any;
   titles: string[] = [];
-  cartBody: any;
+  numberOfItems: any;
   // move it to allproducts page
 
   constructor(public myService: AppHttpService, private local: LocalStorageService, private router: Router) {
@@ -50,10 +50,7 @@ export class ProductsComponent implements OnInit {
       authorization: this.local.get('token')
     }
     this.user = this.myService.getUser();
-    console.log(this.user);
     this.userID = this.user._id;
-    console.log(this.userID);
-
   }
 
   toProductByCategory(x: any) {
@@ -67,17 +64,22 @@ export class ProductsComponent implements OnInit {
       },
       error: err => { console.log(err); }
     })
-
   }
+
+
+
   ngOnInit(): void {
-    this.myService.getCart(this.headers).subscribe({
+    //here i am going to get all titles in cart so determine if add to cart or remove
+    this.myService.getAllfromCart(this.headers).subscribe({
       next: res => {
         this.Cart = res;
         this.userCart = this.Cart.userCart;
         for (var i = 0; i < this.userCart.length; i++) { this.titles.push(this.userCart[i].title) };
+
         this.myService.getAllProducts().subscribe(
           {
             next: (res) => {
+
               console.log(res);
               this.Products = res;
               if (this.myService.getProduct()) { this.Products = this.myService.getProduct(); this.myService.setProduct(null); }
@@ -93,98 +95,90 @@ export class ProductsComponent implements OnInit {
                   this.indicator.push(true);
                 }
               }
-              // for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true) }
+              this.numberOfItems = this.Products.length;
               console.log(this.CartButton);
               console.log(this.Products)
             },
             error(err) { console.log(err) }
           })
+
         console.log(this.titles);
 
       },
       error: err => { console.log(err); }
     });
-    // console.log(this.Products)
-
-
-
   }
 
-  @Output() MyEvent = new EventEmitter();
 
-  cartproducts: { src: string; name: string; category: string; unitPrice: number; }[] = [];
-
-  addToCart(x: number) {
-    console.log(this.Products[x]);
-    if (this.indicator[x]) {
-      this.CartButton[x] = "Remove";
-      this.cartBody = { userID: this.user._id, bookID: this.Products[x]._id };
-      this.myService.addtoCart(this.userID, this.Products[x]._id, this.headers).subscribe(
-        {
-          next: res => {
-            console.log(res);
-          }, error: err => {
-            console.log(err);
-
-          }
-        }
-      );
-    }
-    else {
-      this.CartButton[x] = "Add To Cart";
-      this.myService.removefromCart(this.Products[x].title).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-    }
-    this.indicator[x] = !this.indicator[x];
-    this.local.set('CartButton', this.CartButton);
-    // console.log(product); product:any,
-  }
-  getProductD(product: any) {
-    console.log(product);
-    this.ProductID = product._id;
-    console.log(this.ProductID)
-    console.log(this.userID);
-    this.myService.addtoCart(this.userID, this.ProductID, this.headers).subscribe(
+addToCart(x: number) {
+  console.log(this.Products[x]);
+  if (this.indicator[x]) {
+    this.CartButton[x] = "Remove";
+    this.cartBody = { userID: this.user._id, bookID: this.Products[x]._id };
+    this.myService.addtoCart(this.userID, this.Products[x]._id, this.headers).subscribe(
       {
         next: res => {
           console.log(res);
         }, error: err => {
           console.log(err);
-
         }
       }
-    )
+    );
   }
+  else {
+    this.CartButton[x] = "Add To Cart";
+    this.myService.removefromCart(this.Products[x].title).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
 
-  BuyNow(prod: any) {
-    console.log(prod);
-    this.ProductID = prod._id;
-    this.myService.addtoOrders(this.userID, this.ProductID, this.headers).subscribe({
+      }
+    });
+  }
+  this.indicator[x] = !this.indicator[x];
+  this.local.set('CartButton', this.CartButton);
+}
+
+getProductD(product: any) {
+  console.log(product);
+  this.ProductID = product._id;
+  console.log(this.ProductID)
+  console.log(this.userID);
+  this.myService.addtoCart(this.userID, this.ProductID, this.headers).subscribe(
+    {
       next: res => {
         console.log(res);
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your order is submitted,Once it is accepted ,the shipping company will contact you ',
-          showConfirmButton: false,
-          timer: 3000
-        })
       }, error: err => {
         console.log(err);
+
       }
-    })
-  }
+    }
+  )
+}
+
+BuyNow(prod: any) {
+  console.log(prod);
+  this.ProductID = prod._id;
+  this.myService.addtoOrders(this.userID, this.ProductID, this.headers).subscribe({
+    next: res => {
+      console.log(res);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your order is submitted,Once it is accepted ,the shipping company will contact you ',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    }, error: err => {
+      console.log(err);
+    }
+  })
+}
 
 
-
-
-  search(x: any) {
+  search(x:any){
     console.log(x);
   }
 
@@ -203,6 +197,7 @@ export class ProductsComponent implements OnInit {
     this.modalIdentifier = x;
     console.log(this.modalIdentifier);
   }
+
   modalFilter(x: number) {
     return this.modalIdentifier == x;
   }
@@ -217,4 +212,14 @@ export class ProductsComponent implements OnInit {
     })
   }
 
+
+
+  //////////////////////////////////////
+  setNumberofitems(x:any){
+    this.numberOfItems=x;
+    console.log(this.numberOfItems);
+  }
+
 }
+
+

@@ -18,10 +18,30 @@ export class LoginComponent {
   hide = true;
 
   constructor(
+
     private myServ: SendUserDataService,
     private local: LocalStorageService,
     private myService: AppHttpService,
-    private router: Router) { }
+    private router: Router) {
+    if (local.get('sessionOut')) {
+      console.log("end !");
+      Swal.fire({
+        title: 'User session expired !',
+        text: 'You are been logged out please log in again !.',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+
+      })
+      local.set('sessionOut', false);
+
+    }
+
+
+  }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),

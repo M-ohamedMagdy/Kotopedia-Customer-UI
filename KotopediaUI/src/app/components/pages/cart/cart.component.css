@@ -1,18 +1,17 @@
 .bg-grey {
   background-color: #eae8e8;
-  }
-  .btnsLayout{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  .btnsLayout button{
-    margin: 5px;
-  }
-  .cancelIcon i:hover{
-    cursor: pointer;
-  }
-.bk_img{
-  height: 180px;
-  width: 150px;
+}
+
+.btnsLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.btnsLayout button {
+  margin: 5px;
+}
+
+.cancelIcon i:hover {
+  cursor: pointer;
 }

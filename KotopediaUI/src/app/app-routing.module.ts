@@ -8,6 +8,7 @@ import { CartComponent } from './components/pages/cart/cart.component';
 import { PayementComponent } from './components/pages/payement/payement.component';
 import { ProfileComponent } from "./components/pages/profile/profile.component";
 import { OrderComponent } from './components/pages/order/order.component';
+import { AuthenticationGuard } from './authentication.guard';
 
 const routes: Routes = [
                           {path:"", component:HomeComponent},
