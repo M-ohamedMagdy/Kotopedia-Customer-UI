@@ -15,7 +15,7 @@ li a:hover{
 }
 
 .header-container{
-  height: 75px;
+  min-height: 75px;
 }
 
 .user-dropdown{
@@ -26,3 +26,7 @@ li a:hover{
   height: 40px;
   border-radius: 50%;
 }
+
+/* .show{
+  background-color: var(--color1);
+} */

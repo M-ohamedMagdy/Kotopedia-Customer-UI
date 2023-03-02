@@ -9,6 +9,7 @@ import { AppHttpService } from 'src/app/services/app-http.service';
 export class HeaderComponent implements OnChanges  {
   token:any;
   user:any;
+  defaultImg = "./user.jpg";
   constructor(private myService:AppHttpService){
     this.token=this.myService.getToken();
 console.log(this.token);

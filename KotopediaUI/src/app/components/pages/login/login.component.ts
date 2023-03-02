@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
 
+  hide = true;
+
   constructor(
      private myServ : SendUserDataService,
       private local: LocalStorageService,

@@ -6,7 +6,7 @@ import { HeaderComponent } from './components/partials/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,7 +24,7 @@ import { CartComponent } from './components/pages/cart/cart.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -52,6 +52,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatIconModule,
     MatTabsModule,
     MatCardModule,
     MatSelectModule,

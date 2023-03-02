@@ -12,7 +12,10 @@
       <div class="passwordInput">
         <mat-form-field appearance="outline" class="w-100 py-3">
           <mat-label>Enter your password</mat-label>
-          <input matInput type="password" placeholder="password should be 8 - 16 characters" formControlName="password">
+          <input [type]="hide ? 'password' : 'text'" matInput placeholder="password should be 8 - 16 characters" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
           <mat-error *ngIf="passwordValid">{{passwordValid}}</mat-error>
         </mat-form-field>
       </div>
