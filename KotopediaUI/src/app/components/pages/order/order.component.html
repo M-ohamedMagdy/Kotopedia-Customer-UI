@@ -13,25 +13,26 @@
                   </div>
                   <hr class="my-4">
                 <div class="row mb-4 d-flex justify-content-between align-items-center"  >
-                  <div class="col-md-3 col-lg-3 col-xl-3">
-                    <h6 class="mb-0 text-muted"> {{x.length}} items</h6>
+                  <div class=" col-lg-5 col-xl-5 col-12">
+                    <h6 class="mb-0"><b>{{x.length}} items</b></h6>
                     <h5 class="text-muted">Order ID: {{x._id}}</h5>
                     <h5 class="text-muted">Date: {{x.date}}</h5>
-                    <h5 class="text-muted">Status: {{x.status}}</h5>
+                    <h5 class="">Status:<b> {{x.status}}</b></h5>
                   </div>
-                  <div  class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div *ngFor="let z of x.productsInOrder">
-                      <div class="col-md-2 col-lg-2 col-xl-2">
-                        <img [src]="z.photo" class="img-fluid rounded-3 w-200 h-300  " alt="Cotton T-shirt">
+                  <hr>
+                  <div  class="row d-flex justify-content-around align-items-center">
+                    <div class="row my_ord" *ngFor="let z of x.productsInOrder">
+                      <div class="col-lg-3 col-xl-3 col-12 text-center">
+                        <img [src]="z.photo" class="img-fluid rounded-3 bk_img  " alt="Cotton T-shirt">
                       </div>
-                      <div class="col-md-3 col-lg-3 col-xl-3">
-                        <span class="text-muted">{{z.title}}</span>
-                        <span class="text-black mb-0">{{z.category}}</span>
-                        <span class="text-black mb-0">{{z.quantity}}</span>
+                      <div class="col-lg-5 col-xl-5 col-12 text-center align-items-center mt-4">
+                        <span class=""><b>{{z.title}}</b></span>
+                        <h5 class="text-black mb-0">Category :{{z.category}}</h5>
+                        <h6 class="text-black mb-0">Quantity :<b> {{z.quantity}}</b></h6>
                       </div>
 
-                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                        <h6 class="mb-0">EGP{{z.unitPrice}}</h6>
+                      <div class=" col-lg-3 col-xl-3 col-12 text-center offset-lg-1 mt-4">
+                        <h6 class="mb-0"><b>EGP{{z.unitPrice}}</b></h6>
                       </div>
                     </div>
                   </div>
@@ -39,7 +40,7 @@
 
                   <!-- this is the card -->
 
-                  <hr class="my-4">
+                  <hr class="">
 
                   <div class="pt-5">
                     <h6 class="mb-0"><a routerLink="/cart" class="text-body"><i
