@@ -9,6 +9,8 @@ export class AppComponent {
   title = 'frontend';
   cartproducts: { src: string; name: string; category: string; unitprice: number; }[] = [];
 
+
+
  @Input() getData(x:any){
   this.cartproducts=x;
   console.log(this.cartproducts);

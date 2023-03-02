@@ -46,7 +46,7 @@
         </header>
 
         <div class="row"  >
-          <div class="col-lg-4 col-md-6 col-sm-6 d-flex" *ngFor="let x of Products | filter:text.value
+          <div class="col-lg-4 col-md-6 col-sm-6 d-flex" *ngFor="let x of Products| paginate:{itemsPerPage:itemperpage,currentPage:p} | filter:text.value
            let y=index let z=count " value={{z}}
           >
             <div class="card w-100 my-2 shadow-2-strong">
@@ -107,14 +107,20 @@
 
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Description:</label>
+            <label for="message-text" class="col-form-label feedbacklabel">Description:</label>
             <p class="form-control" id="message-text" >{{x.description}}</p>
           </div>
-          <h3>feedBacks</h3>
-          <div *ngFor="let x of feedBacks">
-            <p>{{x.body}}</p>
-
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label feedbacklabel">Feedbacks:</label>
           </div>
+          <div class="Feedbacks">
+            <div *ngFor="let x of feedBacks" class="form-control mb-1 mt-1 onefeedback" id="message-text">
+                <p ><span class="feedbacklabel">E-mail:</span> {{x.email}}</p>
+                <p ><span class="feedbacklabel">Date: </span>{{x.date}}</p>
+                <p >{{x.body}}</p>
+            </div>
+          </div>
+
       </div>
 
     </div>
@@ -125,7 +131,7 @@
 
 
         <!-- </p> -->
-                <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+                <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto" id="class">
                     <a  class="btn btn-primary shadow-0 me-1" (click)="addToCart(y) " >{{CartButton[y]}}</a>
                   <a href="/pay" class="btn btn-primary m-auto">Buy Now</a>
 
@@ -141,25 +147,11 @@
 
 
         <!-- Pagination -->
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+
+        <pagination-controls class="my-pagination"
+          (pageChange)="p=$event">
+        </pagination-controls>
+
         <!-- Pagination -->
       </div>
     </div>

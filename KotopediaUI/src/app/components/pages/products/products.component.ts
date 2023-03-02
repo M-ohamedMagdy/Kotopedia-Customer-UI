@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -21,6 +22,14 @@ export class ProductsComponent implements OnInit {
 //     'Authorization': `${this.myService.getToken()}` // Here is the token
 //   })
 // };
+
+p:number=1;
+itemperpage:number=12;
+totalitems:any;
+
+
+
+
 Allproducts: { src: string ,category:string}[] =
     [
     { "src": "../../../../assets/img9.jfif","category" :"Romantic"},
@@ -79,9 +88,9 @@ product:any;
       next:(res)=>{
         console.log(res);
         this.Products=res;
-        if(this.myService.getProduct()){this.Products = this.myService.getProduct();this.myService.setProduct(null);}
-        else if(!this.myService.getProduct()){this.Products = res;}
-          for(this.i=0;this.i<this.Products.length;this.i++){ this.CartButton.push("Add To Cart");   this.local.set('cartButton',this.CartButton);}
+        if(this.myService.getProduct()){this.Products = this.myService.getProduct();this.myService.setProduct(null);this.totalitems=this.Products.length;}
+        else if(!this.myService.getProduct()){this.Products = res;this.totalitems=this.Products.length;}
+          for(this.i=0;this.i<this.Products.length;this.i++){ this.CartButton.push("Add To Cart"); this.local.set('cartButton',this.CartButton);}
           for(this.i=0;this.i<this.Products.length;this.i++){ this.indicator.push(true);this.local.set('indicators',this.indicator); }
           console.log(this.CartButton);
         console.log(this.Products)
@@ -123,7 +132,7 @@ product:any;
           console.log(res);
         },
         error:(err)=>{
-console.log(err);
+        console.log(err);
         }
       });
     }
@@ -164,4 +173,8 @@ getFeedBacks(x:any){
   })
 }
 
+  getOne(searchValue: any) {
+    throw new Error('Method not implemented.');
   }
+
+}

@@ -10,7 +10,7 @@ div.container{
 .textContent{
   font-size: 25px;
   line-height: 1.5;
-  /* height: fit-content; */
+  height: fit-content;
   padding: 50px;
 }
 

@@ -108,3 +108,38 @@ input[type="search"]:focus{
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))
   }
+
+  .my-pagination ::ng-deep .ngx-pagination .current {
+    background: var(--color1);
+    text-align: center;
+    border-radius: 5px;
+    color: var(--color4);
+    padding: 1%;
+  }
+
+  .my-pagination ::ng-deep .ngx-pagination  {
+    text-align: center;
+    border-radius: 10px;
+    padding: 1%;
+    margin: auto;
+  }
+
+  .Feedbacks{
+    border: 1px solid;
+    border-color: rgb(217, 214, 214);
+    padding: 10px;
+    border-radius: 7px;
+    margin: 5px;
+  }
+.feedbacklabel{
+  color: var(--color1);
+}
+
+.onefeedback{
+  background-color: rgb(251, 251, 251);
+}
+
+#class{
+ background-color: white;
+ margin-left: 9%;
+}

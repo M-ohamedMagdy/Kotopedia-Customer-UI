@@ -24,7 +24,7 @@ import { CartComponent } from './components/pages/cart/cart.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -57,9 +57,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatSelectModule,
     CommonModule,
     BrowserAnimationsModule,
-    Ng2SearchPipeModule
-
-
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
 
   providers: [
