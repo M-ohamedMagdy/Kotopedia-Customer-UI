@@ -5,17 +5,18 @@ div.container{
   background-size:100% 100%;
   background-repeat:no-repeat;
   overflow: hidden;
-  color: var(--color4);
 }
 .textContent{
-  font-size: 25px;
+  font-size: 1.5rem;
   line-height: 1.5;
   height: fit-content;
   padding: 50px;
 }
 
-.txt{
-  margin: 80px 200px;
+@media(min-width:1030px){
+  .txt{
+    margin: 80px 200px;
+  }
 }
 
 @media (max-width: 500px) {

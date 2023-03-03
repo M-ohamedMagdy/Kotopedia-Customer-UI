@@ -60,18 +60,17 @@ toProductByCategory(x:any){
   if(this.token){
   this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
 next:res=>{
-  console.log(res) ;
+  //console.log(res) ;
   this.myService.setProduct(res) ;
   this.router.navigate(['/products']);
 },
 error:err=>{console.log(err);}
     })
-    // window.location.href = "/products";
 
   }
   else{
     Swal.fire({
-      title: 'Please Sign in to see Books !!',
+      title: 'You need to Login to get access',
       showClass: {
         popup: 'animate__animated animate__fadeInDown'
       },

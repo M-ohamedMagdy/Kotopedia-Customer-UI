@@ -17,12 +17,13 @@ export class HeaderComponent implements OnInit,OnChanges {
     this.token = this.myService.getToken();
     this.user = this.myService.getUser();
 
-    setTimeout(function() {
-      myService.removeToken();
-
-      window.location.href = "/registeration";
-      local.set('sessionOut',true);
-    }, 600000);
+    if (this.token && this.user.role === "customer"){
+      setTimeout(function() {
+        myService.removeToken();
+        window.location.href = "/registeration";
+        local.set('sessionOut',true);
+      }, 600000  /* 30*60*1000 */);
+    }
   }
 
   ngOnInit() : void {

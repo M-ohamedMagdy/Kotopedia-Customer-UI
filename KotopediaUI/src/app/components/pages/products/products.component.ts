@@ -13,20 +13,10 @@ import Swal from 'sweetalert2';
 })
 
 export class ProductsComponent implements OnInit {
-  //way to send token to backend
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `${this.myService.getToken()}` // Here is the token
-  //   })
-  // };
 
   p: number = 1;
   itemperpage: number = 12;
   totalitems: any;
-
-
-
 
   Allproducts: { src: string, category: string }[] =
     [
@@ -74,6 +64,7 @@ export class ProductsComponent implements OnInit {
     this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
       next: res => {
         this.myService.setProduct(res);
+        this.totalitems=this.Products.length;
         window.location.reload();
       },
       error: err => { console.log(err); }
@@ -100,10 +91,10 @@ export class ProductsComponent implements OnInit {
           {
             next: (res) => {
 
-              console.log(res);
+              //console.log(res);
               this.Products = res;
-              if (this.myService.getProduct()) { this.Products = this.myService.getProduct(); this.myService.setProduct(null); }
-              else if (!this.myService.getProduct()) { this.Products = res; }
+              if (this.myService.getProduct()) { this.Products = this.myService.getProduct(); this.myService.setProduct(null); this.totalitems=this.Products.length;}
+              else if (!this.myService.getProduct()) { this.Products = res; this.Products = res;this.totalitems=this.Products.length;}
               for (this.i = 0; this.i < this.Products.length; this.i++) {
                 if (this.titles.includes(this.Products[this.i].title)) {
                   this.CartButton.push("Remove");
@@ -116,14 +107,10 @@ export class ProductsComponent implements OnInit {
                 }
               }
               this.numberOfItems = this.Products.length;
-              console.log(this.CartButton);
-              console.log(this.Products)
+
             },
             error(err) { console.log(err) }
           })
-
-        console.log(this.titles);
-
       },
       error: err => { console.log(err); }
     });
@@ -138,7 +125,7 @@ export class ProductsComponent implements OnInit {
       this.myService.addtoCart(this.userID, this.Products[x]._id, this.headers).subscribe(
         {
           next: res => {
-            console.log(res);
+            //console.log(res);
           }, error: err => {
             console.log(err);
 
@@ -150,7 +137,7 @@ export class ProductsComponent implements OnInit {
       this.CartButton[x] = "Add To Cart";
       this.myService.removefromCart(this.Products[x].title).subscribe({
         next: (res) => {
-          console.log(res);
+          //console.log(res);
         },
         error: (err) => {
           console.log(err);
@@ -170,7 +157,7 @@ export class ProductsComponent implements OnInit {
     this.myService.addtoCart(this.userID, this.ProductID, this.headers).subscribe(
       {
         next: res => {
-          console.log(res);
+          //console.log(res);
         }, error: err => {
           console.log(err);
 
@@ -180,7 +167,7 @@ export class ProductsComponent implements OnInit {
   }
 
   BuyNow(prod: any) {
-    console.log(prod);
+    //console.log(prod);
     this.ProductID = prod._id;
     this.myService.addtoOrders(this.userID, this.ProductID, this.headers).subscribe({
       next: res => {
@@ -205,9 +192,6 @@ export class ProductsComponent implements OnInit {
 
 
   addFeedBack(title: any, fb: any) {
-    console.log(title);
-    console.log(fb);
-    console.log(this.user.email);
 
     this.FeedBackBody = { title, email: this.user.email, body: fb };
     this.myService.addFeedback(this.FeedBackBody).subscribe();
@@ -216,7 +200,7 @@ export class ProductsComponent implements OnInit {
 
   setModalIdentifier(x: any) {
     this.modalIdentifier = x;
-    console.log(this.modalIdentifier);
+    //console.log(this.modalIdentifier);
   }
 
   modalFilter(x: number) {
@@ -227,21 +211,16 @@ export class ProductsComponent implements OnInit {
     this.myService.getFeedBacks(x).subscribe({
       next: (res) => {
         this.feedBacks = res;
-        console.log(res);
+        //console.log(res);
       },
       error(err) { console.log(err) }
     })
   }
 
-
-
   //////////////////////////////////////
   setNumberofitems(x: any) {
     this.numberOfItems = x;
-    console.log(this.numberOfItems);
+    //console.log(this.numberOfItems);
   }
 
-  getOne(searchValue: any) {
-    throw new Error('Method not implemented.');
-  }
 }

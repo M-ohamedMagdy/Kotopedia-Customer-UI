@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
     this.myService.getUserInfo().subscribe(
       {
         next: (res) => {
-          console.log(res)
+          //console.log(res)
           this.user = res;
         },
         error(err) { console.log(err) }
@@ -44,14 +44,14 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.myService.getCart(this.headers).subscribe({
       next: res => {
-        console.log(res);
+        //console.log(res);
         this.Cart = res;
         this.userCart = this.Cart.userCart;
         this.price = 0;
         this.Cart.userCart.forEach((element: any) => {
           this.price += element.quantity * element.unitPrice
         });
-        console.log(this.price);
+        //console.log(this.price);
       }, error: err => {
         console.log(err);
 
@@ -64,7 +64,7 @@ export class CartComponent implements OnInit {
   removeCart(x: any) {
     this.myService.removefromCart(this.userCart[x].title).subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         this.ngOnInit();
       },
       error: (err) => {
@@ -74,17 +74,12 @@ export class CartComponent implements OnInit {
   }
 
   getQuPos(q:any,title:any,unitPrice:any){
-    console.log(+q+1)
-    this.quantity=+q+1;
-    console.log(this.quantity);
-    console.log(this.user._id);
-    console.log(title);
-    console.log(unitPrice);
 
+    this.quantity=+q+1;
       this.price +=  unitPrice;
     this.myService.updateProductQuatity(this.user._id,title,this.quantity,this.headers).subscribe({
       next:res=>{
-        console.log(res);
+        //console.log(res);
       },error:err=>{
         console.log(err);
       }
@@ -93,17 +88,13 @@ export class CartComponent implements OnInit {
 
   }
   getQuNeg(q:any,title:any,unitPrice:any){
-    console.log(+q-1)
     this.quantity=+q-1;
-    console.log(this.quantity);
-    console.log(this.user._id);
-    console.log(title);
     if(this.quantity >=1){
     this.price -=  unitPrice;
 
     this.myService.updateProductQuatity(this.user._id,title,this.quantity,this.headers).subscribe({
       next:res=>{
-        console.log(res);
+        //console.log(res);
       },error:err=>{
         console.log(err);
 
@@ -116,10 +107,9 @@ export class CartComponent implements OnInit {
   }
 
   placeOrder() {
-    console.log(this.user._id);
     this.myService.addCartToOrders(this.user._id, this.headers).subscribe({
       next: res => {
-        console.log(res);
+        //console.log(res);
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -139,7 +129,7 @@ export class CartComponent implements OnInit {
     console.log("empty cart clicked");
     this.myService.emptyCart(this.headers).subscribe({
       next: res => {
-        console.log(res);
+        //console.log(res);
         this.ngOnInit()
       }, error: err => {
         console.log(err);

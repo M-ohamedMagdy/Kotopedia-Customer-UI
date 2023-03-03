@@ -70,7 +70,13 @@ export class SignupComponent {
         this.myServ.sendSignupData(fd).subscribe({
           next: res => {
             console.log(res);
-            location.href = '/home';
+            Swal.fire({
+              icon: 'success',
+              title: 'signed up successfully',
+              text: 'Please login to continue',
+              timer: 2000
+            })
+            setTimeout(function(){ location.reload(); },2000)
           }, error: err => {
             console.log(err);
           }

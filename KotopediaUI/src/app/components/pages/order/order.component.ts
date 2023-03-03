@@ -22,7 +22,7 @@ export class OrderComponent implements OnInit {
     this.myService.getUserInfo().subscribe(
       {
         next:(res)=>{
-          console.log(res)
+          //console.log(res)
           this.user=res;
         },
         error(err){console.log(err)}
@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.myService.getAllOrders(this.headers).subscribe({
       next:(res)=>{
-        console.log(res)
+        //console.log(res)
         this.ordersArr=res;
       },
       error(err){console.log(err)}
@@ -42,11 +42,11 @@ export class OrderComponent implements OnInit {
 
 
   cancelOrder(orderID:any){
-    console.log(orderID);
+    //console.log(orderID);
 
     this.myService.cancelOrder(orderID,this.headers).subscribe({
       next:res=>{
-        console.log(res);
+        //console.log(res);
         this.ngOnInit();
       },error:err=>{
         console.log(err);

@@ -1,8 +1,8 @@
-body{
+body {
   background-color: var(--color4);
 }
 
-.bg{
+.bg {
   width: 100%;
   min-height: 35vh;
   background-image: url('../../../../assets/img120.jpg');
@@ -10,11 +10,11 @@ body{
   position: relative;
 }
 
-.bg .container{
+.bg .container {
   overflow: hidden;
 }
 
-.userImg{
+.userImg {
   border-radius: 50%;
   position: absolute;
   width: 180px;
@@ -23,33 +23,32 @@ body{
   top: 8rem;
 }
 
-.changepic{
- border-radius: 50%;
- position: absolute;
- width: 200px;
- height: 200px;
- left: 2rem;
- top: 19rem;
- background-color: rgba(250, 195, 127, 0.475);
- /* display: block; */
- display: none;
- z-index: 111111;
- text-align: center;
-}
-
-.changepic:hover{
-display: block;
-}
-
-.camera{
+.changepic {
+  border-radius: 50%;
   position: absolute;
- font-size: 35px;
- left: 5.2rem;
- top: 6rem;
- color: var(--color1);
+  width: 200px;
+  height: 200px;
+  left: 2rem;
+  top: 19rem;
+  background-color: rgba(250, 195, 127, 0.475);
+  display: none;
+  z-index: 111111;
+  text-align: center;
 }
 
-.changepic h6{
+.changepic:hover {
+  display: block;
+}
+
+.camera {
+  position: absolute;
+  font-size: 35px;
+  left: 5.2rem;
+  top: 6rem;
+  color: var(--color1);
+}
+
+.changepic h6 {
   position: absolute;
   left: 1.6rem;
   top: 9rem;
@@ -57,117 +56,130 @@ display: block;
 
 }
 
-.data{
-height: 338px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-around;
-margin-top: 7%;
-margin-bottom: 2%;
+.data {
+  height: 338px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 7%;
+  margin-bottom: 2%;
 }
-.con{
+
+.con {
   background-color: var(--color4);
   width: 100%;
   padding: 0.5rem;
   padding-left: 2rem;
   border-radius: 10px;
 }
-label{
+
+label {
   color: var(--color1);
   font-size: 20px;
 }
-.con input,select{
 
-  color:var(--color1) ;
+.con input,
+select {
+
+  color: var(--color1);
   background-color: var(--color4);
   width: 90%;
   outline: none;
   border: 0;
 
 }
-.txt:focus{
-border: 5px;
-border-bottom: 5px var(--color1);
+
+.txt:focus {
+  border: 5px;
+  border-bottom: 5px var(--color1);
 }
-.edit,.done{
+
+.edit,
+.done {
   color: var(--color1);
 
 }
-.done{
+
+.done {
   display: none;
 }
 
 @media (max-width: 1200px) {
-  .userImg{
+  .userImg {
     width: 150px;
     height: 150px;
-    top:8rem;
-  }}
+    top: 10rem;
+  }
+}
 
 @media (max-width: 800px) {
-  .userImg{
-  width: 120px;
-  height: 120px;
-  top:8rem;
+  .userImg {
+    width: 120px;
+    height: 120px;
+    top: 10.5rem
+  }
 
+  .changepic {
+    width: 150px;
+    height: 150px;
+  }
+
+  .camera {
+    left: 3.8rem;
+    top: 4rem;
+    font-size: 30px;
+
+  }
+
+  .changepic h6 {
+
+    left: 0.5rem;
+    top: 6rem;
+  }
 }
 
-.changepic{
-  width: 150px;
-  height: 150px;
- }
- .camera{
-  left: 3.8rem;
-  top: 4rem;
-  font-size: 30px;
 
-}
-.changepic h6{
-
-  left: 0.5rem;
-  top: 6rem;
-}
-}
-
-
-.bootstrapButton{
+.bootstrapButton {
   background-color: var(--color1);
   border-color: var(--color1);
   color: var(--color4);
 }
 
-#AddModalButton{
+#AddModalButton {
   color: white;
 }
 
 ::ng-deep .cdk-overlay-container {
-    position: fixed;
-    z-index: 2000;
+  position: fixed;
+  z-index: 2000;
 }
-.modal-content{
+
+.modal-content {
   background-color: var(--color4);
 
 }
-button#Mbtn{
+
+button#Mbtn {
   background-color: var(--color1);
   color: var(--color4);
 }
-button#Mbtn i{
+
+button#Mbtn i {
   color: var(--color4);
   /* margin-left: 3px; */
 }
 
-button#Mbtn:hover{
+button#Mbtn:hover {
   color: white;
 }
-.con label{
+
+.con label {
   display: inline;
 }
-.con h2{
+
+.con h2 {
   color: var(--color1);
-  display:inline;
+  display: inline;
   margin-left: 5px;
 }
-
-

@@ -26,8 +26,8 @@ export class LoginComponent {
     if (local.get('sessionOut')) {
       console.log("end !");
       Swal.fire({
-        title: 'User session expired !',
-        text: 'You are logged out please log in again !.',
+        title: 'User session expired !!',
+        text: 'You have been logged out please log in again !!',
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },

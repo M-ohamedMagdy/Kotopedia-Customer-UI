@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
     this.myService.getUserInfo().subscribe(
       {
         next: (res) => {
-          console.log(res)
+          //console.log(res)
           this.user = res;
           this.userImage = this.user.photo;
         },
@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
 
   get nameNotValid() {
     return !this.UpdatingForm.controls['name'].value ? 'You must enter a value'
-      : !this.UpdatingForm.controls['name'].valid ? 'Invalid name format' : '';
+      : !this.UpdatingForm.controls['name'].valid ? 'Invalid name format, name should be 3 - 15 characters' : '';
   }
 
   get emailNotValid() {
@@ -77,12 +77,12 @@ export class ProfileComponent implements OnInit {
 
   updateUserInfo(newUserData:any){
       this.userID = newUserData._id;
-      console.log(this.userID);
+      //console.log(this.userID);
       this.UpdatingForm = this.formBulider.group({
-      name:[this.user.name,[Validators.maxLength(12),Validators.minLength(3)]],
+      name:[this.user.name,[Validators.maxLength(15),Validators.minLength(3)]],
       email:[this.user.email,[Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       gender:[this.user.gender],
-      password:['',[Validators.maxLength(12),Validators.minLength(6)]],
+      password:['',[Validators.maxLength(16),Validators.minLength(8)]],
       photo:[]
     })
   }
@@ -104,7 +104,7 @@ export class ProfileComponent implements OnInit {
 
       this.myService.updateUserData(fd, this.headers).subscribe({
         next: res => {
-          console.log(res);
+          //console.log(res);
           this.ngOnInit();
         }, error: err => {
           console.log(err);

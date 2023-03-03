@@ -22,7 +22,7 @@ export class AuthenticationGuard implements CanActivate {
 if(this.myService.getToken()){return true;}
 else{
   Swal.fire({
-    title: 'Please Sign in to see Our Books !!',
+    title: 'You need to Login to get access',
     showClass: {
       popup: 'animate_animated animate_fadeInDown'
     },
