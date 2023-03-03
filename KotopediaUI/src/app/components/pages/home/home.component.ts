@@ -47,7 +47,7 @@ constructor(private mysrv:SendUserDataService,private myService:AppHttpService,p
 
     Toast.fire({
       icon: 'success',
-      title: 'Signed in successfully'
+      title: 'Sign in successfully'
     })
     this.local.set('fs',false);
 
@@ -55,14 +55,14 @@ constructor(private mysrv:SendUserDataService,private myService:AppHttpService,p
 
 }
 
- toProductByCategory(x:any){
+toProductByCategory(x:any){
   console.log(this.Allproducts[x].category);
   if(this.token){
   this.myService.getProductsByCategory(this.Allproducts[x].category).subscribe({
 next:res=>{
-   console.log(res) ;
-   this.myService.setProduct(res) ;
-   this.router.navigate(['/products']);
+  console.log(res) ;
+  this.myService.setProduct(res) ;
+  this.router.navigate(['/products']);
 },
 error:err=>{console.log(err);}
     })
@@ -71,7 +71,7 @@ error:err=>{console.log(err);}
   }
   else{
     Swal.fire({
-      title: 'Please Sign in to see Our Books !!',
+      title: 'Please Sign in to see Books !!',
       showClass: {
         popup: 'animate__animated animate__fadeInDown'
       },

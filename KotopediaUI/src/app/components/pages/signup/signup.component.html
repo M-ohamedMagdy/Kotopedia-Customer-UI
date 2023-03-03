@@ -42,7 +42,7 @@
 
     <div class="text-center my-2">
       <div class="text-start my-1">please insert your personal photo</div>
-      <input class="form-control" type="file" (change)="getPhoto($event)" formControlName="photo">
+      <input class="form-control" type="file" (change)="getPhoto($event)" accept="image/*" formControlName="photo">
     </div>
 
     <div class="signupButton text-center py-2">

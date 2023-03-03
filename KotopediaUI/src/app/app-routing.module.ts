@@ -15,11 +15,11 @@ const routes: Routes = [
                           {path:"home", component:HomeComponent},
                           {path:"about",component:AboutComponent},
                           {path:"registeration", component:RegisterationComponent},
-                          {path:"products",component:ProductsComponent},
-                          {path:"cart",component:CartComponent},
-                          {path:"pay",component:PayementComponent},
-                          {path:"profile",component:ProfileComponent},
-                          {path:"order",component:OrderComponent}
+                          {path:"products",component:ProductsComponent,canActivate:[AuthenticationGuard]},
+                          {path:"cart",component:CartComponent,canActivate:[AuthenticationGuard]},
+                          {path:"pay",component:PayementComponent,canActivate:[AuthenticationGuard]},
+                          {path:"profile",component:ProfileComponent,canActivate:[AuthenticationGuard]},
+                          {path:"order",component:OrderComponent,canActivate:[AuthenticationGuard]}
                         ];
 
 @NgModule({

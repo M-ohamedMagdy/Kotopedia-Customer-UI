@@ -100,20 +100,20 @@ border-bottom: 5px var(--color1);
 
 @media (max-width: 1200px) {
   .userImg{
-   width: 150px;
-   height: 150px;
-   top:9rem;
+    width: 150px;
+    height: 150px;
+    top:8rem;
   }}
 
 @media (max-width: 800px) {
- .userImg{
+  .userImg{
   width: 120px;
   height: 120px;
-  top:10.5rem;
+  top:8rem;
 
- }
+}
 
- .changepic{
+.changepic{
   width: 150px;
   height: 150px;
  }

@@ -24,7 +24,7 @@ export class SignupComponent {
     this.signupForm = this.formBulider.group({
       name: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      password: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.pattern(new RegExp('^[a-zA-Z0-9]{8,16}$'))]],
       gender: ['', Validators.required],
       photo: [[]],
     })

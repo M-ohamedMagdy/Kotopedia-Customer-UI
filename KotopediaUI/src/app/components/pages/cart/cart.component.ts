@@ -73,43 +73,46 @@ export class CartComponent implements OnInit {
     });
   }
 
-  getQuPos(q: any, title: any, unitPrice: any) {
-    console.log(+q + 1)
-    this.quantity = +q + 1;
+  getQuPos(q:any,title:any,unitPrice:any){
+    console.log(+q+1)
+    this.quantity=+q+1;
+    console.log(this.quantity);
+    console.log(this.user._id);
+    console.log(title);
+    console.log(unitPrice);
 
-    this.Cart.userCart.forEach((element: any) => {
-      this.price += element.quantity * element.unitPrice
-    });
-    // this.ngOnInit();
-    this.myService.updateProductQuatity(this.user._id, title, this.quantity, this.headers).subscribe({
-      next: res => {
+      this.price +=  unitPrice;
+    this.myService.updateProductQuatity(this.user._id,title,this.quantity,this.headers).subscribe({
+      next:res=>{
         console.log(res);
-      }, error: err => {
+      },error:err=>{
+        console.log(err);
+      }
+    })
+
+
+  }
+  getQuNeg(q:any,title:any,unitPrice:any){
+    console.log(+q-1)
+    this.quantity=+q-1;
+    console.log(this.quantity);
+    console.log(this.user._id);
+    console.log(title);
+    if(this.quantity >=1){
+    this.price -=  unitPrice;
+
+    this.myService.updateProductQuatity(this.user._id,title,this.quantity,this.headers).subscribe({
+      next:res=>{
+        console.log(res);
+      },error:err=>{
         console.log(err);
 
       }
     })
+  }else{
+    console.log("you can't");
+
   }
-
-  getQuNeg(q: any, title: any, unitPrice: any) {
-    console.log(+q);
-
-    if (+q > 1) {
-      this.quantity = +q - 1;
-      this.Cart.userCart.forEach((element: any) => {
-        this.price += element.quantity * element.unitPrice
-      });
-      this.myService.updateProductQuatity(this.user._id, title, this.quantity, this.headers).subscribe({
-        next: res => {
-          console.log(res);
-        }, error: err => {
-          console.log(err);
-        }
-      })
-    }
-    else {
-      this.quantity = 1;
-    }
   }
 
   placeOrder() {
@@ -120,7 +123,7 @@ export class CartComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Your order is submitted,Once it is accepted ,the shipping company will contact you ',
+          title: 'Your order is submitted successfully,Once it is accepted ,the shipping company will contact you ',
           showConfirmButton: false,
           timer: 3000
         })
@@ -137,12 +140,12 @@ export class CartComponent implements OnInit {
     this.myService.emptyCart(this.headers).subscribe({
       next: res => {
         console.log(res);
+        this.ngOnInit()
       }, error: err => {
         console.log(err);
       }
     })
     this.price = 0;
-    this.ngOnInit()
   }
 
 }

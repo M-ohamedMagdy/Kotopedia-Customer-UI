@@ -116,7 +116,7 @@ export class ProfileComponent implements OnInit {
       Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Invalid Data Entry',
+            text: 'Invalid Data Entered',
           })
     }
   }
