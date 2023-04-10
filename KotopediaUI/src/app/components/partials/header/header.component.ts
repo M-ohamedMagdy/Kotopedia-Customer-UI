@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit,OnChanges {
         myService.removeToken();
         window.location.href = "/registeration";
         local.set('sessionOut',true);
-      }, 600000  /* 30*60*1000 */);
+      }, 30*60*1000);
     }
   }
 

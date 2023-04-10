@@ -16,6 +16,12 @@
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "rxjs-compat",
+              "lodash",
+              "sweetalert2"
+            ]
+            ,
             "polyfills": [
               "zone.js"
             ],
@@ -42,7 +48,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
